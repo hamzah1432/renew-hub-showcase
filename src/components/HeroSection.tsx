@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Clock, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import heroSolar from "@/assets/hero-solar.jpg";
 import heroWind from "@/assets/hero-wind.jpg";
 import heroLab from "@/assets/hero-lab.jpg";
@@ -10,22 +12,46 @@ const slides = [
     id: 1,
     image: heroSolar,
     title: "Master Solar Energy Engineering",
-    subtitle: "Comprehensive courses in photovoltaic systems and solar technology",
-    cta: "Explore Courses"
+    subtitle: "Comprehensive courses in photovoltaic systems and solar technology"
   },
   {
     id: 2,
     image: heroWind,
-    title: "Wind Energy Solutions",
-    subtitle: "Advanced training in wind turbine design and implementation",
-    cta: "Explore Courses"
+    title: "Wind Energy Solutions", 
+    subtitle: "Advanced training in wind turbine design and implementation"
   },
   {
     id: 3,
     image: heroLab,
     title: "Green Technology Innovation",
-    subtitle: "Hands-on experience with cutting-edge renewable energy systems",
-    cta: "Explore Courses"
+    subtitle: "Hands-on experience with cutting-edge renewable energy systems"
+  }
+];
+
+const featuredCourses = [
+  {
+    id: 1,
+    title: "Solar Panel Installation & Maintenance",
+    description: "Master photovoltaic systems and installation techniques",
+    duration: "12 weeks",
+    students: "150+",
+    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=300&h=200&fit=crop"
+  },
+  {
+    id: 2,
+    title: "Wind Turbine Engineering",
+    description: "Advanced wind turbine design and grid integration",
+    duration: "16 weeks", 
+    students: "120+",
+    image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=300&h=200&fit=crop"
+  },
+  {
+    id: 3,
+    title: "Energy Storage Systems",
+    description: "Battery technologies and energy management systems",
+    duration: "10 weeks",
+    students: "90+", 
+    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop"
   }
 ];
 
@@ -67,20 +93,86 @@ export const HeroSection = () => {
             
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-              <div className="max-w-2xl text-white animate-fade-up">
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                  {slide.title}
-                </h1>
-                <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
-                  {slide.subtitle}
-                </p>
-                <Button 
-                  size="lg" 
-                  className="gradient-primary text-white hover:scale-105 transition-transform duration-300 px-8 py-6 text-lg font-semibold rounded-xl shadow-hero"
-                >
-                  <Play className="mr-2 h-5 w-5" />
-                  {slide.cta}
-                </Button>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+                {/* Left Side - Main Content */}
+                <div className="text-white animate-fade-up">
+                  <div className="mb-4">
+                    <Badge className="gradient-primary text-white mb-4">
+                      Leading Renewable Energy Education
+                    </Badge>
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Professional Institute
+                  </h1>
+                  <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+                    {slide.subtitle}
+                  </p>
+                  <Button 
+                    size="lg" 
+                    className="gradient-primary text-white hover:scale-105 transition-transform duration-300 px-8 py-6 text-lg font-semibold rounded-xl shadow-hero"
+                  >
+                    <ArrowRight className="mr-2 h-5 w-5" />
+                    Explore All Courses
+                  </Button>
+                </div>
+
+                {/* Right Side - Featured Courses */}
+                <div className="animate-fade-up" style={{ animationDelay: "0.2s" }}>
+                  <div className="mb-6">
+                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                      Top Courses
+                    </h2>
+                    <p className="text-white/80">
+                      Most popular renewable energy programs
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
+                    {featuredCourses.map((course, courseIndex) => (
+                      <Card 
+                        key={course.id}
+                        className="bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                        style={{ animationDelay: `${0.3 + courseIndex * 0.1}s` }}
+                      >
+                        <CardContent className="p-4">
+                          <div className="flex gap-4">
+                            <div 
+                              className="w-20 h-16 bg-cover bg-center rounded-lg flex-shrink-0"
+                              style={{ backgroundImage: `url(${course.image})` }}
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-secondary mb-1 line-clamp-1">
+                                {course.title}
+                              </h3>
+                              <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                                {course.description}
+                              </p>
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                                  <div className="flex items-center">
+                                    <Clock className="h-3 w-3 mr-1" />
+                                    {course.duration}
+                                  </div>
+                                  <div className="flex items-center">
+                                    <Users className="h-3 w-3 mr-1" />
+                                    {course.students}
+                                  </div>
+                                </div>
+                                <Button 
+                                  size="sm" 
+                                  className="gradient-primary text-white text-xs px-3 py-1 h-7"
+                                >
+                                  <BookOpen className="mr-1 h-3 w-3" />
+                                  Enroll Now
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
