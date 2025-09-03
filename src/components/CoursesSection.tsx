@@ -13,6 +13,7 @@ const courses = [
     students: "150+",
     language: "English",
     level: "Beginner",
+    package: "Bronze",
     image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop"
   },
   {
@@ -23,16 +24,18 @@ const courses = [
     students: "120+",
     language: "English",
     level: "Advanced",
+    package: "Diamond",
     image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=400&h=250&fit=crop"
   },
   {
     id: 3,
-    title: "هندسة الطاقة المتجددة",
-    description: "دورة شاملة في تقنيات الطاقة المتجددة وتطبيقاتها الصناعية والسكنية",
-    duration: "14 أسبوع",
+    title: "Renewable Energy Engineering",
+    description: "Comprehensive course on renewable energy technologies and their industrial applications.",
+    duration: "14 weeks",
     students: "200+",
-    language: "Arabic",
-    level: "متوسط",
+    language: "English",
+    level: "Intermediate",
+    package: "Gold",
     image: "https://images.unsplash.com/photo-1497436072909-f5e4be1713d2?w=400&h=250&fit=crop"
   },
   {
@@ -43,16 +46,18 @@ const courses = [
     students: "90+",
     language: "English",
     level: "Intermediate",
+    package: "Silver",
     image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=250&fit=crop"
   },
   {
     id: 5,
-    title: "تكنولوجيا الألواح الشمسية",
-    description: "تعلم تصميم وتركيب وصيانة أنظمة الطاقة الشمسية للمشاريع السكنية والتجارية",
-    duration: "8 أسابيع",
+    title: "Solar Panel Technology",
+    description: "Learn design, installation and maintenance of solar energy systems for residential and commercial projects.",
+    duration: "8 weeks",
     students: "180+",
-    language: "Arabic",
-    level: "مبتدئ",
+    language: "English",
+    level: "Beginner",
+    package: "Bronze",
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop"
   },
   {
@@ -63,6 +68,7 @@ const courses = [
     students: "110+",
     language: "English",
     level: "Advanced",
+    package: "Gold",
     image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop"
   }
 ];
