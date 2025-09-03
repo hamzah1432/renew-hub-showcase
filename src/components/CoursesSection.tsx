@@ -74,11 +74,29 @@ const courses = [
 ];
 
 export const CoursesSection = () => {
-  const [filter, setFilter] = useState("All");
+  const [languageFilter, setLanguageFilter] = useState("All");
+  const [packageFilter, setPackageFilter] = useState("All");
 
-  const filteredCourses = filter === "All" 
-    ? courses 
-    : courses.filter(course => course.language === filter);
+  const filteredCourses = courses.filter(course => {
+    const languageMatch = languageFilter === "All" || course.language === languageFilter;
+    const packageMatch = packageFilter === "All" || course.package === packageFilter;
+    return languageMatch && packageMatch;
+  });
+
+  const getPackageStyle = (packageName: string) => {
+    switch (packageName) {
+      case "Bronze":
+        return "bg-amber-600 text-white";
+      case "Silver":
+        return "bg-slate-400 text-white";
+      case "Gold":
+        return "bg-yellow-500 text-white";
+      case "Diamond":
+        return "bg-blue-600 text-white";
+      default:
+        return "bg-primary text-white";
+    }
+  };
 
   return (
     <section className="py-20 bg-muted/30">
@@ -95,21 +113,42 @@ export const CoursesSection = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex justify-center mb-12 animate-fade-up">
+        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12 animate-fade-up">
+          {/* Language Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
-            {["All", "English", "Arabic"].map((lang) => (
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Language:</span>
+            {["All", "English"].map((lang) => (
               <Button
                 key={lang}
-                variant={filter === lang ? "default" : "ghost"}
-                onClick={() => setFilter(lang)}
+                variant={languageFilter === lang ? "default" : "ghost"}
+                onClick={() => setLanguageFilter(lang)}
                 className={`px-6 py-2 rounded-lg transition-all ${
-                  filter === lang 
+                  languageFilter === lang 
                     ? "gradient-primary text-white shadow-md" 
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 <Globe className="mr-2 h-4 w-4" />
                 {lang}
+              </Button>
+            ))}
+          </div>
+
+          {/* Package Filter */}
+          <div className="flex bg-card rounded-xl p-1 shadow-card">
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Package:</span>
+            {["All", "Bronze", "Silver", "Gold", "Diamond"].map((pkg) => (
+              <Button
+                key={pkg}
+                variant={packageFilter === pkg ? "default" : "ghost"}
+                onClick={() => setPackageFilter(pkg)}
+                className={`px-4 py-2 rounded-lg transition-all ${
+                  packageFilter === pkg 
+                    ? "gradient-primary text-white shadow-md" 
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {pkg}
               </Button>
             ))}
           </div>
@@ -130,13 +169,18 @@ export const CoursesSection = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent" />
                   <Badge 
-                    className="absolute top-4 right-4 gradient-primary text-white"
+                    className={`absolute top-4 right-4 font-bold px-3 py-1 ${getPackageStyle(course.package)}`}
+                  >
+                    {course.package}
+                  </Badge>
+                  <Badge 
+                    className="absolute top-4 left-4 gradient-primary text-white"
                   >
                     {course.language}
                   </Badge>
                   <Badge 
                     variant="secondary"
-                    className="absolute top-4 left-4 bg-white/90 text-secondary"
+                    className="absolute bottom-4 left-4 bg-white/90 text-secondary"
                   >
                     {course.level}
                   </Badge>
