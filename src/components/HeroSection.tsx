@@ -35,7 +35,7 @@ const featuredCourses = [
     description: "Master photovoltaic systems and installation techniques",
     duration: "12 weeks",
     students: "150+",
-    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=300&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop"
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ const featuredCourses = [
     description: "Advanced wind turbine design and grid integration",
     duration: "16 weeks", 
     students: "120+",
-    image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=300&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&h=200&fit=crop"
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const featuredCourses = [
     description: "Battery technologies and energy management systems",
     duration: "10 weeks",
     students: "90+", 
-    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop"
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop"
   }
 ];
 
