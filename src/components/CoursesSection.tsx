@@ -117,7 +117,7 @@ export const CoursesSection = () => {
           {/* Language Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
             <span className="text-sm font-medium text-muted-foreground px-3 py-2">Language:</span>
-            {["All", "English"].map((lang) => (
+            {["All", "English", "Arabic"].map((lang) => (
               <Button
                 key={lang}
                 variant={languageFilter === lang ? "default" : "ghost"}
