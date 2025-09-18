@@ -182,16 +182,16 @@ export const HeroSection = () => {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+        className="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/80 backdrop-blur-md text-secondary hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg"
       >
-        <ChevronLeft className="h-6 w-6" />
+        <ChevronLeft className="h-7 w-7" />
       </button>
       
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+        className="absolute right-6 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full bg-white/80 backdrop-blur-md text-secondary hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg"
       >
-        <ChevronRight className="h-6 w-6" />
+        <ChevronRight className="h-7 w-7" />
       </button>
 
       {/* Dots Indicator */}
