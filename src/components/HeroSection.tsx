@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, BookOpen, Clock, Users, ArrowRight } from "lucide-react";
+import { BookOpen, Clock, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -65,13 +65,6 @@ export const HeroSection = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
 
   return (
     <section className="relative h-screen overflow-hidden">
@@ -179,20 +172,6 @@ export const HeroSection = () => {
         </div>
       ))}
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
 
       {/* Dots Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-2">
