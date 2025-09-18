@@ -1,14 +1,38 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, GraduationCap, Phone, Mail } from "lucide-react";
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, X, GraduationCap, Phone, Mail, ChevronDown } from "lucide-react";
 
 const navigation = [
   { name: "Home", href: "#home" },
-  { name: "Courses", href: "#courses" },
   { name: "About", href: "#about" },
   { name: "Team", href: "#team" },
   { name: "Contact", href: "#contact" }
 ];
+
+const courseCategories = {
+  "Renewable Energy Courses": [
+    "Mastering Solar PV Off-Grid System Design Course – MSPOD",
+    "Advanced Introduction to Solar PV System Course – AISPV", 
+    "Certified Solar PV Electrical Drawing Design Course – CSPED",
+    "Mastering Solar PV Structure Design Course – MSPSD",
+    "Mastering Solar PV Sales & Marketing Course – MSPSM",
+    "Certified Solar PV Testing & Commissioning Course – CSPTC",
+    "Mastering Solar PV System Installation Course – MSPSI",
+    "Mastering SketchUP & PVsyst Solar PV Design Course – MSPVD",
+    "Mastering Solar PV Project Management Course – MSPPM"
+  ],
+  "Electrical Power Course": [
+    "Mastering Electrical System Construction Course – MESC"
+  ]
+};
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -48,6 +72,36 @@ export const Header = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
+            
+            {/* Courses Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-foreground hover:text-primary transition-colors font-medium relative group">
+                Courses
+                <ChevronDown className="ml-1 h-4 w-4" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-96 bg-white">
+                {Object.entries(courseCategories).map(([category, courses]) => (
+                  <div key={category}>
+                    <DropdownMenuLabel className="text-primary font-semibold">
+                      {category}
+                    </DropdownMenuLabel>
+                    {courses.map((course) => (
+                      <DropdownMenuItem key={course} className="cursor-pointer hover:bg-muted">
+                        <span className="text-sm">{course}</span>
+                      </DropdownMenuItem>
+                    ))}
+                    <DropdownMenuSeparator />
+                  </div>
+                ))}
+                <DropdownMenuItem 
+                  onClick={() => scrollToSection("#courses")}
+                  className="cursor-pointer bg-primary/10 hover:bg-primary/20"
+                >
+                  <span className="font-semibold text-primary">View All Courses</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Desktop Contact Info & CTA */}

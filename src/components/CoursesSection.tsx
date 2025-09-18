@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BookOpen, Clock, Users, Globe } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { BookOpen, Clock, Users, Globe, PlayCircle, UserCheck, DollarSign } from "lucide-react";
 
 const courses = [
   {
@@ -14,6 +15,16 @@ const courses = [
     language: "English",
     level: "Beginner",
     package: "Bronze",
+    category: "Renewable Energy",
+    price: 299,
+    discountPrice: 199,
+    lectures: 45,
+    capacity: 200,
+    currentStudents: 150,
+    instructor: {
+      name: "Dr. Sarah Johnson",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b789?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop"
   },
   {
@@ -25,6 +36,16 @@ const courses = [
     language: "English",
     level: "Advanced",
     package: "Diamond",
+    category: "Renewable Energy",
+    price: 899,
+    discountPrice: 699,
+    lectures: 68,
+    capacity: 150,
+    currentStudents: 120,
+    instructor: {
+      name: "Prof. Michael Chen",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=400&h=250&fit=crop"
   },
   {
@@ -36,6 +57,16 @@ const courses = [
     language: "English",
     level: "Intermediate",
     package: "Gold",
+    category: "Renewable Energy",
+    price: 599,
+    discountPrice: 449,
+    lectures: 52,
+    capacity: 250,
+    currentStudents: 200,
+    instructor: {
+      name: "Dr. Emily Rodriguez",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1497436072909-f5e4be1713d2?w=400&h=250&fit=crop"
   },
   {
@@ -47,6 +78,16 @@ const courses = [
     language: "English",
     level: "Intermediate",
     package: "Silver",
+    category: "Renewable Energy",
+    price: 399,
+    discountPrice: 299,
+    lectures: 38,
+    capacity: 120,
+    currentStudents: 90,
+    instructor: {
+      name: "Dr. James Wilson",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=250&fit=crop"
   },
   {
@@ -58,6 +99,16 @@ const courses = [
     language: "English",
     level: "Beginner",
     package: "Bronze",
+    category: "Renewable Energy",
+    price: 249,
+    discountPrice: 149,
+    lectures: 32,
+    capacity: 200,
+    currentStudents: 180,
+    instructor: {
+      name: "Sarah Thompson",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop"
   },
   {
@@ -69,6 +120,16 @@ const courses = [
     language: "English",
     level: "Advanced",
     package: "Gold",
+    category: "Electrical Power",
+    price: 549,
+    discountPrice: 399,
+    lectures: 48,
+    capacity: 130,
+    currentStudents: 110,
+    instructor: {
+      name: "Dr. Robert Kim",
+      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=40&h=40&fit=crop&crop=face"
+    },
     image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop"
   }
 ];
@@ -76,11 +137,13 @@ const courses = [
 export const CoursesSection = () => {
   const [languageFilter, setLanguageFilter] = useState("All");
   const [packageFilter, setPackageFilter] = useState("All");
+  const [categoryFilter, setCategoryFilter] = useState("All");
 
   const filteredCourses = courses.filter(course => {
     const languageMatch = languageFilter === "All" || course.language === languageFilter;
     const packageMatch = packageFilter === "All" || course.package === packageFilter;
-    return languageMatch && packageMatch;
+    const categoryMatch = categoryFilter === "All" || course.category === categoryFilter;
+    return languageMatch && packageMatch && categoryMatch;
   });
 
   const getPackageStyle = (packageName: string) => {
@@ -113,7 +176,26 @@ export const CoursesSection = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-12 animate-fade-up">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-4 mb-12 animate-fade-up">
+          {/* Category Filter */}
+          <div className="flex bg-card rounded-xl p-1 shadow-card">
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Category:</span>
+            {["All", "Renewable Energy", "Electrical Power"].map((category) => (
+              <Button
+                key={category}
+                variant={categoryFilter === category ? "default" : "ghost"}
+                onClick={() => setCategoryFilter(category)}
+                className={`px-4 py-2 rounded-lg transition-all ${
+                  categoryFilter === category 
+                    ? "gradient-primary text-white shadow-md" 
+                    : "text-muted-foreground hover:text-primary"
+                }`}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
+
           {/* Language Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
             <span className="text-sm font-medium text-muted-foreground px-3 py-2">Language:</span>
@@ -194,14 +276,43 @@ export const CoursesSection = () => {
                   {course.description}
                 </p>
                 
-                <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
+                {/* Price Section */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center">
+                    <DollarSign className="h-4 w-4 text-primary" />
+                    <span className="text-2xl font-bold text-primary">${course.discountPrice}</span>
+                    <span className="text-lg text-muted-foreground line-through ml-2">${course.price}</span>
+                  </div>
+                  <Badge variant="destructive" className="text-xs">
+                    {Math.round(((course.price - course.discountPrice) / course.price) * 100)}% OFF
+                  </Badge>
+                </div>
+
+                {/* Course Stats */}
+                <div className="grid grid-cols-3 gap-4 text-sm text-muted-foreground mb-4">
                   <div className="flex items-center">
                     <Clock className="h-4 w-4 mr-1" />
                     {course.duration}
                   </div>
                   <div className="flex items-center">
-                    <Users className="h-4 w-4 mr-1" />
-                    {course.students}
+                    <PlayCircle className="h-4 w-4 mr-1" />
+                    {course.lectures} lectures
+                  </div>
+                  <div className="flex items-center">
+                    <UserCheck className="h-4 w-4 mr-1" />
+                    {course.currentStudents}/{course.capacity}
+                  </div>
+                </div>
+
+                {/* Instructor */}
+                <div className="flex items-center gap-2 mb-4 p-2 bg-muted/50 rounded-lg">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={course.instructor.avatar} alt={course.instructor.name} />
+                    <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-xs font-medium">Instructor</p>
+                    <p className="text-sm text-muted-foreground">{course.instructor.name}</p>
                   </div>
                 </div>
 
