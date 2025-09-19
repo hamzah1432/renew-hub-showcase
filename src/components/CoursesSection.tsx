@@ -3,76 +3,92 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { BookOpen, Clock, Users, Globe, PlayCircle, UserCheck, DollarSign } from "lucide-react";
+import {
+  BookOpen,
+  Clock,
+  Users,
+  Globe,
+  PlayCircle,
+  UserCheck,
+  DollarSign,
+} from "lucide-react";
 
 const courses = [
   {
     id: 1,
-    title: "Solar Panel Installation & Maintenance",
-    description: "Master the fundamentals of photovoltaic systems, installation techniques, and maintenance procedures.",
-    duration: "12 weeks",
-    students: "150+",
+    title: "Mastering Energy Storage Systems Course (MESS) – English Version",
+    description:
+      "The “Mastering Energy Storage Systems Course” is a comprehensive program designed to equip participants with the knowledge and skills necessary to understand the fundamental principles and practical applications of energy storage systems. This course covers the technical and economic aspects of various energy storage technologies, including batteries, pumped hydro, thermal storage, and emerging innovations. Participants will explore infrastructure considerations, integration with renewable energy sources, and the potential applications of energy storage in different sectors.",
+    duration: "6 hours",
+    students: "50+",
     language: "English",
-    level: "Beginner",
+    level: "All Levels",
     package: "Bronze",
     category: "Renewable Energy",
-    price: 299,
-    discountPrice: 199,
-    lectures: 45,
-    capacity: 200,
-    currentStudents: 150,
+    price: 400,
+    discountPrice: 80,
+    lectures: 8,
+    capacity: 100,
+    currentStudents: 59,
     instructor: {
-      name: "Dr. Sarah Johnson",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b789?w=40&h=40&fit=crop&crop=face"
+      name: "Tarek MERHBI",
+      avatar: "public/Tarek_MERHBI.png",
     },
-    image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop"
+    image: "public/MESS_Course.png",
   },
   {
     id: 2,
-    title: "Wind Turbine Engineering",
-    description: "Advanced course covering wind turbine design, aerodynamics, and grid integration systems.",
-    duration: "16 weeks",
-    students: "120+",
+    title:
+      "Advanced Solar Water Pumping Design and Installation Course (ASPDI) – English Version",
+    description:
+      "The Advanced Solar Water Pumping Design and Installation Course (ASPDI) – English Version provides participants with in-depth, hands-on training in designing, installing, and maintaining solar water pumping systems. Trainees will develop practical skills to assess site conditions, select appropriate components, design efficient solar pumping solutions, and execute installations with confidence. Through guided exercises, real-life case studies, and step-by-step instruction, participants will gain the expertise to implement reliable solar water pumping systems in diverse settings.",
+    duration: "2 hours",
+    students: "25",
     language: "English",
-    level: "Advanced",
+    level: "All Levels",
     package: "Diamond",
     category: "Renewable Energy",
-    price: 899,
-    discountPrice: 699,
-    lectures: 68,
-    capacity: 150,
-    currentStudents: 120,
+    price: 120,
+    discountPrice: 24,
+    lectures: 1,
+    capacity: 80,
+    currentStudents: 25,
     instructor: {
-      name: "Prof. Michael Chen",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face"
+      name: "Awangum",
+      avatar: "public/Awangum.png",
     },
-    image: "https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?w=400&h=250&fit=crop"
+    image: "public/ASPDI_Course.png",
   },
   {
     id: 3,
-    title: "Renewable Energy Engineering",
-    description: "Comprehensive course on renewable energy technologies and their industrial applications.",
-    duration: "14 weeks",
-    students: "200+",
+    title:
+      "Hands-on Training course in Battery and Inverter Repairs Course (HTBIR) – English Version",
+    description:
+      "The Hands-on Training Course in Battery and Inverter Repairs equips participants with practical expertise to understand inverter and battery systems, diagnose common faults, troubleshoot problems step-by-step, and perform reliable maintenance and repair. Through real-life case studies and guided exercises, trainees gain the confidence and technical skills needed to repair and maintain power systems effectively.",
+    duration: "1 hour",
+    students: "29",
     language: "English",
-    level: "Intermediate",
+    level: "All Levels",
     package: "Gold",
     category: "Renewable Energy",
-    price: 599,
-    discountPrice: 449,
-    lectures: 52,
-    capacity: 250,
-    currentStudents: 200,
+    price: 60,
+    discountPrice: 12,
+    lectures: 1,
+    capacity: 150,
+    currentStudents: 20,
     instructor: {
       name: "Dr. Emily Rodriguez",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
     },
-    image: "https://images.unsplash.com/photo-1497436072909-f5e4be1713d2?w=400&h=250&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1497436072909-f5e4be1713d2?w=400&h=250&fit=crop",
   },
   {
     id: 4,
     title: "Energy Storage Systems",
-    description: "Comprehensive training on battery technologies, grid storage, and energy management systems.",
+    description:
+      "Comprehensive training on battery technologies, grid storage, and energy management systems.",
     duration: "10 weeks",
     students: "90+",
     language: "English",
@@ -86,14 +102,17 @@ const courses = [
     currentStudents: 90,
     instructor: {
       name: "Dr. James Wilson",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
     },
-    image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=250&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=250&fit=crop",
   },
   {
     id: 5,
     title: "Solar Panel Technology",
-    description: "Learn design, installation and maintenance of solar energy systems for residential and commercial projects.",
+    description:
+      "Learn design, installation and maintenance of solar energy systems for residential and commercial projects.",
     duration: "8 weeks",
     students: "180+",
     language: "English",
@@ -107,14 +126,17 @@ const courses = [
     currentStudents: 180,
     instructor: {
       name: "Sarah Thompson",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
     },
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop",
   },
   {
     id: 6,
     title: "Smart Grid Technology",
-    description: "Learn about intelligent power grids, IoT integration, and automated energy distribution.",
+    description:
+      "Learn about intelligent power grids, IoT integration, and automated energy distribution.",
     duration: "12 weeks",
     students: "110+",
     language: "English",
@@ -128,10 +150,12 @@ const courses = [
     currentStudents: 110,
     instructor: {
       name: "Dr. Robert Kim",
-      avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=40&h=40&fit=crop&crop=face"
+      avatar:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=40&h=40&fit=crop&crop=face",
     },
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop"
-  }
+    image:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop",
+  },
 ];
 
 export const CoursesSection = () => {
@@ -139,10 +163,13 @@ export const CoursesSection = () => {
   const [packageFilter, setPackageFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
 
-  const filteredCourses = courses.filter(course => {
-    const languageMatch = languageFilter === "All" || course.language === languageFilter;
-    const packageMatch = packageFilter === "All" || course.package === packageFilter;
-    const categoryMatch = categoryFilter === "All" || course.category === categoryFilter;
+  const filteredCourses = courses.filter((course) => {
+    const languageMatch =
+      languageFilter === "All" || course.language === languageFilter;
+    const packageMatch =
+      packageFilter === "All" || course.package === packageFilter;
+    const categoryMatch =
+      categoryFilter === "All" || course.category === categoryFilter;
     return languageMatch && packageMatch && categoryMatch;
   });
 
@@ -170,8 +197,8 @@ export const CoursesSection = () => {
             Our Courses
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive renewable energy engineering programs designed by industry experts
-            to prepare you for a sustainable future career.
+            Comprehensive renewable energy engineering programs designed by
+            industry experts to prepare you for a sustainable future career.
           </p>
         </div>
 
@@ -179,15 +206,17 @@ export const CoursesSection = () => {
         <div className="flex flex-col lg:flex-row justify-center items-center gap-4 mb-12 animate-fade-up">
           {/* Category Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Category:</span>
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+              Category:
+            </span>
             {["All", "Renewable Energy", "Electrical Power"].map((category) => (
               <Button
                 key={category}
                 variant={categoryFilter === category ? "default" : "ghost"}
                 onClick={() => setCategoryFilter(category)}
                 className={`px-4 py-2 rounded-lg transition-all ${
-                  categoryFilter === category 
-                    ? "gradient-primary text-white shadow-md" 
+                  categoryFilter === category
+                    ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
@@ -198,15 +227,17 @@ export const CoursesSection = () => {
 
           {/* Language Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Language:</span>
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+              Language:
+            </span>
             {["All", "English", "Arabic"].map((lang) => (
               <Button
                 key={lang}
                 variant={languageFilter === lang ? "default" : "ghost"}
                 onClick={() => setLanguageFilter(lang)}
                 className={`px-6 py-2 rounded-lg transition-all ${
-                  languageFilter === lang 
-                    ? "gradient-primary text-white shadow-md" 
+                  languageFilter === lang
+                    ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
@@ -218,15 +249,17 @@ export const CoursesSection = () => {
 
           {/* Package Filter */}
           <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">Package:</span>
+            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+              Package:
+            </span>
             {["All", "Bronze", "Silver", "Gold", "Diamond"].map((pkg) => (
               <Button
                 key={pkg}
                 variant={packageFilter === pkg ? "default" : "ghost"}
                 onClick={() => setPackageFilter(pkg)}
                 className={`px-4 py-2 rounded-lg transition-all ${
-                  packageFilter === pkg 
-                    ? "gradient-primary text-white shadow-md" 
+                  packageFilter === pkg
+                    ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
@@ -239,28 +272,28 @@ export const CoursesSection = () => {
         {/* Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredCourses.map((course, index) => (
-            <Card 
+            <Card
               key={course.id}
               className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-scale-in border-0 shadow-card"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader className="p-0">
-                <div 
+                <div
                   className="h-48 bg-cover bg-center rounded-t-lg relative overflow-hidden"
                   style={{ backgroundImage: `url(${course.image})` }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent" />
-                  <Badge 
-                    className={`absolute top-4 right-4 font-bold px-3 py-1 ${getPackageStyle(course.package)}`}
+                  <Badge
+                    className={`absolute top-4 right-4 font-bold px-3 py-1 ${getPackageStyle(
+                      course.package
+                    )}`}
                   >
                     {course.package}
                   </Badge>
-                  <Badge 
-                    className="absolute top-4 left-4 gradient-primary text-white"
-                  >
+                  <Badge className="absolute top-4 left-4 gradient-primary text-white">
                     {course.language}
                   </Badge>
-                  <Badge 
+                  <Badge
                     variant="secondary"
                     className="absolute bottom-4 left-4 bg-white/90 text-secondary"
                   >
@@ -275,16 +308,24 @@ export const CoursesSection = () => {
                 <p className="text-muted-foreground mb-4 line-clamp-2">
                   {course.description}
                 </p>
-                
+
                 {/* Price Section */}
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex items-center">
                     <DollarSign className="h-4 w-4 text-primary" />
-                    <span className="text-2xl font-bold text-primary">${course.discountPrice}</span>
-                    <span className="text-lg text-muted-foreground line-through ml-2">${course.price}</span>
+                    <span className="text-2xl font-bold text-primary">
+                      ${course.discountPrice}
+                    </span>
+                    <span className="text-lg text-muted-foreground line-through ml-2">
+                      ${course.price}
+                    </span>
                   </div>
                   <Badge variant="destructive" className="text-xs">
-                    {Math.round(((course.price - course.discountPrice) / course.price) * 100)}% OFF
+                    {Math.round(
+                      ((course.price - course.discountPrice) / course.price) *
+                        100
+                    )}
+                    % OFF
                   </Badge>
                 </div>
 
@@ -307,12 +348,22 @@ export const CoursesSection = () => {
                 {/* Instructor */}
                 <div className="flex items-center gap-2 mb-4 p-2 bg-muted/50 rounded-lg">
                   <Avatar className="h-8 w-8">
-                    <AvatarImage src={course.instructor.avatar} alt={course.instructor.name} />
-                    <AvatarFallback>{course.instructor.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    <AvatarImage
+                      src={course.instructor.avatar}
+                      alt={course.instructor.name}
+                    />
+                    <AvatarFallback>
+                      {course.instructor.name
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
+                    </AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-xs font-medium">Instructor</p>
-                    <p className="text-sm text-muted-foreground">{course.instructor.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {course.instructor.name}
+                    </p>
                   </div>
                 </div>
 

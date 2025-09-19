@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, BookOpen, Clock, Users, ArrowRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  BookOpen,
+  Clock,
+  Users,
+  ArrowRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,20 +19,21 @@ const slides = [
     id: 1,
     image: heroSolar,
     title: "Master Solar Energy Engineering",
-    subtitle: "Comprehensive courses in photovoltaic systems and solar technology"
+    subtitle:
+      "Comprehensive courses in photovoltaic systems and solar technology",
   },
   {
     id: 2,
     image: heroWind,
-    title: "Wind Energy Solutions", 
-    subtitle: "Advanced training in wind turbine design and implementation"
+    title: "Wind Energy Solutions",
+    subtitle: "Advanced training in wind turbine design and implementation",
   },
   {
     id: 3,
     image: heroLab,
     title: "Green Technology Innovation",
-    subtitle: "Hands-on experience with cutting-edge renewable energy systems"
-  }
+    subtitle: "Hands-on experience with cutting-edge renewable energy systems",
+  },
 ];
 
 const featuredCourses = [
@@ -35,24 +43,27 @@ const featuredCourses = [
     description: "Master photovoltaic systems and installation techniques",
     duration: "12 weeks",
     students: "150+",
-    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=300&h=200&fit=crop",
   },
   {
     id: 2,
     title: "Wind Turbine Engineering",
     description: "Advanced wind turbine design and grid integration",
-    duration: "16 weeks", 
+    duration: "16 weeks",
     students: "120+",
-    image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&h=200&fit=crop"
+    image:
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=300&h=200&fit=crop",
   },
   {
     id: 3,
     title: "Energy Storage Systems",
     description: "Battery technologies and energy management systems",
     duration: "10 weeks",
-    students: "90+", 
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop"
-  }
+    students: "90+",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop",
+  },
 ];
 
 export const HeroSection = () => {
@@ -80,8 +91,11 @@ export const HeroSection = () => {
         <div
           key={slide.id}
           className={`absolute inset-0 transition-transform duration-700 ease-in-out ${
-            index === currentSlide ? "translate-x-0" : 
-            index < currentSlide ? "-translate-x-full" : "translate-x-full"
+            index === currentSlide
+              ? "translate-x-0"
+              : index < currentSlide
+              ? "-translate-x-full"
+              : "translate-x-full"
           }`}
         >
           <div
@@ -90,7 +104,7 @@ export const HeroSection = () => {
           >
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/90 to-primary/70" />
-            
+
             {/* Content */}
             <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
@@ -107,8 +121,8 @@ export const HeroSection = () => {
                   <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
                     {slide.subtitle}
                   </p>
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     className="gradient-primary text-white hover:scale-105 transition-transform duration-300 px-8 py-6 text-lg font-semibold rounded-xl shadow-hero"
                   >
                     <ArrowRight className="mr-2 h-5 w-5" />
@@ -117,7 +131,10 @@ export const HeroSection = () => {
                 </div>
 
                 {/* Right Side - Featured Courses */}
-                <div className="animate-fade-up" style={{ animationDelay: "0.2s" }}>
+                <div
+                  className="animate-fade-up"
+                  style={{ animationDelay: "0.2s" }}
+                >
                   <div className="mb-6">
                     <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
                       Top Courses
@@ -126,19 +143,23 @@ export const HeroSection = () => {
                       Most popular renewable energy programs
                     </p>
                   </div>
-                  
+
                   <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
                     {featuredCourses.map((course, courseIndex) => (
-                      <Card 
+                      <Card
                         key={course.id}
                         className="bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                        style={{ animationDelay: `${0.3 + courseIndex * 0.1}s` }}
+                        style={{
+                          animationDelay: `${0.3 + courseIndex * 0.1}s`,
+                        }}
                       >
                         <CardContent className="p-4">
                           <div className="flex gap-4">
-                            <div 
+                            <div
                               className="w-20 h-16 bg-cover bg-center rounded-lg flex-shrink-0"
-                              style={{ backgroundImage: `url(${course.image})` }}
+                              style={{
+                                backgroundImage: `url(${course.image})`,
+                              }}
                             />
                             <div className="flex-1 min-w-0">
                               <h3 className="font-semibold text-secondary mb-1 line-clamp-1">
@@ -158,8 +179,8 @@ export const HeroSection = () => {
                                     {course.students}
                                   </div>
                                 </div>
-                                <Button 
-                                  size="sm" 
+                                <Button
+                                  size="sm"
                                   className="gradient-primary text-white text-xs px-3 py-1 h-7"
                                 >
                                   <BookOpen className="mr-1 h-3 w-3" />
@@ -186,7 +207,7 @@ export const HeroSection = () => {
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
-      
+
       <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
