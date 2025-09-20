@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,13 +20,12 @@ const courses = [
     description:
       "The “Mastering Energy Storage Systems Course” is a comprehensive program designed to equip participants with the knowledge and skills necessary to understand the fundamental principles and practical applications of energy storage systems. This course covers the technical and economic aspects of various energy storage technologies, including batteries, pumped hydro, thermal storage, and emerging innovations. Participants will explore infrastructure considerations, integration with renewable energy sources, and the potential applications of energy storage in different sectors.",
     duration: "6 hours",
-    students: "50+",
     language: "English",
     level: "All Levels",
     package: "Bronze",
     category: "Renewable Energy",
-    price: 400,
-    discountPrice: 80,
+    price: "400.00",
+    discountPrice: "80.00",
     lectures: 8,
     capacity: 100,
     currentStudents: 59,
@@ -43,13 +42,12 @@ const courses = [
     description:
       "The Advanced Solar Water Pumping Design and Installation Course (ASPDI) – English Version provides participants with in-depth, hands-on training in designing, installing, and maintaining solar water pumping systems. Trainees will develop practical skills to assess site conditions, select appropriate components, design efficient solar pumping solutions, and execute installations with confidence. Through guided exercises, real-life case studies, and step-by-step instruction, participants will gain the expertise to implement reliable solar water pumping systems in diverse settings.",
     duration: "2 hours",
-    students: "25",
     language: "English",
     level: "All Levels",
     package: "Diamond",
     category: "Renewable Energy",
-    price: 120,
-    discountPrice: 24,
+    price: "120.00",
+    discountPrice: "24.00",
     lectures: 1,
     capacity: 80,
     currentStudents: 25,
@@ -66,95 +64,86 @@ const courses = [
     description:
       "The Hands-on Training Course in Battery and Inverter Repairs equips participants with practical expertise to understand inverter and battery systems, diagnose common faults, troubleshoot problems step-by-step, and perform reliable maintenance and repair. Through real-life case studies and guided exercises, trainees gain the confidence and technical skills needed to repair and maintain power systems effectively.",
     duration: "1 hour",
-    students: "29",
     language: "English",
     level: "All Levels",
     package: "Gold",
     category: "Renewable Energy",
-    price: 60,
-    discountPrice: 12,
+    price: "60.00",
+    discountPrice: "12.00",
     lectures: 1,
     capacity: 150,
     currentStudents: 20,
     instructor: {
-      name: "Dr. Emily Rodriguez",
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+      name: "Charles Ekpima",
+      avatar: "public/Charles_Ekpima.png",
     },
-    image:
-      "https://images.unsplash.com/photo-1497436072909-f5e4be1713d2?w=400&h=250&fit=crop",
+    image: "public/HTBIR_Course.png",
   },
   {
     id: 4,
-    title: "Energy Storage Systems",
+    title:
+      "3D Modeling Integration In Solar System Course (DMISS) – English Version",
     description:
-      "Comprehensive training on battery technologies, grid storage, and energy management systems.",
-    duration: "10 weeks",
-    students: "90+",
+      "The “3D Modeling Integration in Solar System (DMISS) Course” helps solar professionals transform standard 2D drawings into realistic, high-impact 3D visuals that win clients faster. In today’s market, showing clients exactly how their solar system will look on their property builds instant trust and sets you apart from competitors still relying on flat blueprints. This course equips you with the tools and techniques to create stunning, accurate, and professional 3D presentations that sell.",
+    duration: "7 hours",
     language: "English",
-    level: "Intermediate",
+    level: "All Levels",
     package: "Silver",
     category: "Renewable Energy",
-    price: 399,
-    discountPrice: 299,
-    lectures: 38,
-    capacity: 120,
-    currentStudents: 90,
+    price: "325.00",
+    discountPrice: "65.00",
+    lectures: 22,
+    capacity: 100,
+    currentStudents: 25,
     instructor: {
-      name: "Dr. James Wilson",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
+      name: "Abdulrahman Al-Mashti",
+      avatar: "public/Abdulrahman_Almashti.png",
     },
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=250&fit=crop",
+    image: "public/DMISS_Course.png",
   },
   {
     id: 5,
-    title: "Solar Panel Technology",
+    title:
+      "Professional Course in SCADA-Based Monitoring & Control for Solar Microgrid Systems (SMGCS) – English Version",
     description:
-      "Learn design, installation and maintenance of solar energy systems for residential and commercial projects.",
-    duration: "8 weeks",
-    students: "180+",
+      "The “Professional Course in SCADA-Based Monitoring & Control for Solar Microgrid Systems (SMGCS)” provides participants with in-depth technical knowledge and practical skills in the design, setup, and operation of SCADA systems for solar microgrids. This course covers SCADA architecture, sensors and communication protocols, real-time performance monitoring, operational control strategies, and data analytics to ensure reliable, efficient, and safe management of solar microgrid assets.",
+    duration: "3 hours",
     language: "English",
-    level: "Beginner",
+    level: "All Levels",
     package: "Bronze",
     category: "Renewable Energy",
-    price: 249,
-    discountPrice: 149,
-    lectures: 32,
-    capacity: 200,
-    currentStudents: 180,
+    price: 200.0,
+    discountPrice: 40.0,
+    lectures: 3,
+    capacity: 100,
+    currentStudents: 36,
     instructor: {
-      name: "Sarah Thompson",
-      avatar:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
+      name: "Salem Al Khawaja",
+      avatar: "public/Salem_Al_Khawaja.jpeg",
     },
-    image:
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop",
+    image: "public/SMGCS_Course.png",
   },
   {
     id: 6,
-    title: "Smart Grid Technology",
+    title:
+      "Mastering Solar String Inverter Sizing Course (MSSIS) – English Version",
     description:
-      "Learn about intelligent power grids, IoT integration, and automated energy distribution.",
-    duration: "12 weeks",
-    students: "110+",
+      "The “Mastering Solar String Inverter Sizing” course is designed to equip participants with the essential knowledge and practical skills needed to accurately size and select string inverters for solar photovoltaic (PV) systems. The course covers inverter fundamentals, key sizing criteria, design calculations, and real-world application examples to ensure optimal system performance and compliance with industry standards.",
+    duration: "3 hours",
     language: "English",
-    level: "Advanced",
+    level: "All Levels",
     package: "Gold",
     category: "Electrical Power",
-    price: 549,
-    discountPrice: 399,
-    lectures: 48,
-    capacity: 130,
-    currentStudents: 110,
+    price: 140.0,
+    discountPrice: 55.0,
+    lectures: 9,
+    capacity: 150,
+    currentStudents: 87,
     instructor: {
-      name: "Dr. Robert Kim",
-      avatar:
-        "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=40&h=40&fit=crop&crop=face",
+      name: "Abdulrahman Smadi",
+      avatar: "public/Abdulrahman_Smadi.jpeg",
     },
-    image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=250&fit=crop",
+    image: "public/MSSIC_Course.png",
   },
 ];
 
@@ -162,6 +151,12 @@ export const CoursesSection = () => {
   const [languageFilter, setLanguageFilter] = useState("All");
   const [packageFilter, setPackageFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
+  const [displayedCoursesCount, setDisplayedCoursesCount] = useState(3);
+
+  // Reset displayed courses count when filters change
+  useEffect(() => {
+    setDisplayedCoursesCount(3);
+  }, [languageFilter, packageFilter, categoryFilter]);
 
   const filteredCourses = courses.filter((course) => {
     const languageMatch =
@@ -172,6 +167,13 @@ export const CoursesSection = () => {
       categoryFilter === "All" || course.category === categoryFilter;
     return languageMatch && packageMatch && categoryMatch;
   });
+
+  const displayedCourses = filteredCourses.slice(0, displayedCoursesCount);
+  const hasMoreCourses = filteredCourses.length > displayedCoursesCount;
+
+  const handleViewMore = () => {
+    setDisplayedCoursesCount((prev) => prev + 3);
+  };
 
   const getPackageStyle = (packageName: string) => {
     switch (packageName) {
@@ -203,10 +205,10 @@ export const CoursesSection = () => {
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-4 mb-12 animate-fade-up">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4 mb-8 lg:mb-12 animate-fade-up">
           {/* Category Filter */}
-          <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
+            <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Category:
             </span>
             {["All", "Renewable Energy", "Electrical Power"].map((category) => (
@@ -214,20 +216,24 @@ export const CoursesSection = () => {
                 key={category}
                 variant={categoryFilter === category ? "default" : "ghost"}
                 onClick={() => setCategoryFilter(category)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-2 lg:px-4 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm whitespace-nowrap ${
                   categoryFilter === category
                     ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
-                {category}
+                {category === "Renewable Energy"
+                  ? "Renewable"
+                  : category === "Electrical Power"
+                  ? "Electrical"
+                  : category}
               </Button>
             ))}
           </div>
 
           {/* Language Filter */}
-          <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto">
+            <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Language:
             </span>
             {["All", "English", "Arabic"].map((lang) => (
@@ -235,21 +241,21 @@ export const CoursesSection = () => {
                 key={lang}
                 variant={languageFilter === lang ? "default" : "ghost"}
                 onClick={() => setLanguageFilter(lang)}
-                className={`px-6 py-2 rounded-lg transition-all ${
+                className={`px-3 lg:px-6 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm ${
                   languageFilter === lang
                     ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
                 }`}
               >
-                <Globe className="mr-2 h-4 w-4" />
+                <Globe className="mr-1 lg:mr-2 h-3 lg:h-4 w-3 lg:w-4" />
                 {lang}
               </Button>
             ))}
           </div>
 
           {/* Package Filter */}
-          <div className="flex bg-card rounded-xl p-1 shadow-card">
-            <span className="text-sm font-medium text-muted-foreground px-3 py-2">
+          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
+            <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Package:
             </span>
             {["All", "Bronze", "Silver", "Gold", "Diamond"].map((pkg) => (
@@ -257,7 +263,7 @@ export const CoursesSection = () => {
                 key={pkg}
                 variant={packageFilter === pkg ? "default" : "ghost"}
                 onClick={() => setPackageFilter(pkg)}
-                className={`px-4 py-2 rounded-lg transition-all ${
+                className={`px-2 lg:px-4 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm whitespace-nowrap ${
                   packageFilter === pkg
                     ? "gradient-primary text-white shadow-md"
                     : "text-muted-foreground hover:text-primary"
@@ -270,8 +276,8 @@ export const CoursesSection = () => {
         </div>
 
         {/* Courses Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredCourses.map((course, index) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
+          {displayedCourses.map((course, index) => (
             <Card
               key={course.id}
               className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-scale-in border-0 shadow-card"
@@ -375,6 +381,21 @@ export const CoursesSection = () => {
             </Card>
           ))}
         </div>
+
+        {/* View More Button */}
+        {hasMoreCourses && (
+          <div className="text-center mt-12 animate-fade-up">
+            <Button
+              // onClick={handleViewMore}
+              variant="outline"
+              size="lg"
+              className="px-8 py-3 text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+            >
+              View More Courses
+              <BookOpen className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -115,15 +115,15 @@ export const HeroSection = () => {
                       Leading Renewable Energy Education
                     </Badge>
                   </div>
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                  <h1 className="text-3xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                     Professional Institute
                   </h1>
-                  <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
+                  <p className="text-lg md:text-2xl mb-6 md:mb-8 opacity-90 leading-relaxed">
                     {slide.subtitle}
                   </p>
                   <Button
                     size="lg"
-                    className="gradient-primary text-white hover:scale-105 transition-transform duration-300 px-8 py-6 text-lg font-semibold rounded-xl shadow-hero"
+                    className="gradient-primary text-white hover:scale-105 transition-transform duration-300 px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-semibold rounded-xl shadow-hero"
                   >
                     <ArrowRight className="mr-2 h-5 w-5" />
                     Explore All Courses
@@ -135,56 +135,59 @@ export const HeroSection = () => {
                   className="animate-fade-up"
                   style={{ animationDelay: "0.2s" }}
                 >
-                  <div className="mb-6">
-                    <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                  <div className="mb-4 md:mb-6">
+                    <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
                       Top Courses
                     </h2>
-                    <p className="text-white/80">
+                    <p className="text-sm md:text-base text-white/80">
                       Most popular renewable energy programs
                     </p>
                   </div>
 
-                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-                    {featuredCourses.map((course, courseIndex) => (
+                  <div className="space-y-3 md:space-y-4 max-h-80 md:max-h-96 overflow-y-auto pr-2">
+                    {featuredCourses.slice(0, 2).map((course, courseIndex) => (
                       <Card
                         key={course.id}
-                        className="bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                        className="bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-300 hover:-translate-y-1 md:block hidden"
                         style={{
                           animationDelay: `${0.3 + courseIndex * 0.1}s`,
                         }}
                       >
-                        <CardContent className="p-4">
-                          <div className="flex gap-4">
+                        <CardContent className="p-3 md:p-4">
+                          <div className="flex gap-3 md:gap-4">
                             <div
-                              className="w-20 h-16 bg-cover bg-center rounded-lg flex-shrink-0"
+                              className="w-16 md:w-20 h-12 md:h-16 bg-cover bg-center rounded-lg flex-shrink-0"
                               style={{
                                 backgroundImage: `url(${course.image})`,
                               }}
                             />
                             <div className="flex-1 min-w-0">
-                              <h3 className="font-semibold text-secondary mb-1 line-clamp-1">
+                              <h3 className="font-semibold text-secondary mb-1 line-clamp-1 text-sm md:text-base">
                                 {course.title}
                               </h3>
-                              <p className="text-sm text-muted-foreground mb-2 line-clamp-2">
+                              <p className="text-xs md:text-sm text-muted-foreground mb-2 line-clamp-1 md:line-clamp-2">
                                 {course.description}
                               </p>
                               <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                                <div className="flex items-center gap-2 md:gap-3 text-xs text-muted-foreground">
                                   <div className="flex items-center">
                                     <Clock className="h-3 w-3 mr-1" />
                                     {course.duration}
                                   </div>
-                                  <div className="flex items-center">
+                                  <div className="flex items-center hidden md:flex">
                                     <Users className="h-3 w-3 mr-1" />
                                     {course.students}
                                   </div>
                                 </div>
                                 <Button
                                   size="sm"
-                                  className="gradient-primary text-white text-xs px-3 py-1 h-7"
+                                  className="gradient-primary text-white text-xs px-2 md:px-3 py-1 h-6 md:h-7"
                                 >
                                   <BookOpen className="mr-1 h-3 w-3" />
-                                  Enroll Now
+                                  <span className="hidden md:inline">
+                                    Enroll Now
+                                  </span>
+                                  <span className="md:hidden">Enroll</span>
                                 </Button>
                               </div>
                             </div>
@@ -192,6 +195,46 @@ export const HeroSection = () => {
                         </CardContent>
                       </Card>
                     ))}
+
+                    {/* Mobile: Show only 1 simplified card */}
+                    <div className="md:hidden space-y-3">
+                      {featuredCourses
+                        .slice(0, 1)
+                        .map((course, courseIndex) => (
+                          <Card
+                            key={course.id}
+                            className="bg-white/95 backdrop-blur-sm border-0 shadow-hero"
+                          >
+                            <CardContent className="p-3">
+                              <div className="flex gap-3">
+                                <div
+                                  className="w-14 h-10 bg-cover bg-center rounded-lg flex-shrink-0"
+                                  style={{
+                                    backgroundImage: `url(${course.image})`,
+                                  }}
+                                />
+                                <div className="flex-1 min-w-0">
+                                  <h3 className="font-semibold text-secondary mb-1 line-clamp-1 text-sm">
+                                    {course.title}
+                                  </h3>
+                                  <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                                      <Clock className="h-3 w-3 mr-1" />
+                                      {course.duration}
+                                    </div>
+                                    <Button
+                                      size="sm"
+                                      className="gradient-primary text-white text-xs px-2 py-1 h-6"
+                                    >
+                                      Enroll
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                    </div>
                   </div>
                 </div>
               </div>
