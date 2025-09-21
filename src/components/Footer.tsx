@@ -1,4 +1,13 @@
-import { GraduationCap, Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import {
+  GraduationCap,
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -8,17 +17,23 @@ export const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
-                <GraduationCap className="h-6 w-6 text-white" />
+              <div className="w-10 h-10 gradient-primary-500 rounded-lg flex items-center justify-center">
+                <img
+                  src="PREI_logo.png"
+                  alt="Professional Institute Renewable Energy Engineering"
+                />
               </div>
               <div>
                 <div className="text-xl font-bold">Professional Institute</div>
-                <div className="text-sm text-white/80">Renewable Energy Engineering</div>
+                <div className="text-sm text-white/80">
+                  Renewable Energy Engineering
+                </div>
               </div>
             </div>
             <p className="text-white/80 leading-relaxed">
-              Leading provider of renewable energy engineering education and professional development programs.
-              Empowering the next generation of sustainable energy experts.
+              Leading provider of renewable energy engineering education and
+              professional development programs. Empowering the next generation
+              of sustainable energy experts.
             </p>
             <div className="flex space-x-4">
               <button className="p-2 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
@@ -43,10 +58,10 @@ export const Footer = () => {
               {[
                 "About Us",
                 "Our Courses",
-                "Certification Programs", 
+                "Certification Programs",
                 "Corporate Training",
                 "Success Stories",
-                "Career Support"
+                "Career Support",
               ].map((link) => (
                 <li key={link}>
                   <button className="text-white/80 hover:text-white transition-colors hover:translate-x-1 transform duration-300">
@@ -67,7 +82,7 @@ export const Footer = () => {
                 "Energy Storage Technology",
                 "Smart Grid Solutions",
                 "Green Building Design",
-                "Sustainable Engineering"
+                "Sustainable Engineering",
               ].map((program) => (
                 <li key={program}>
                   <button className="text-white/80 hover:text-white transition-colors hover:translate-x-1 transform duration-300">
@@ -90,15 +105,17 @@ export const Footer = () => {
                   <div>United States</div>
                 </div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                 <div className="text-white/80">+1 (555) 123-4567</div>
               </div>
-              
+
               <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
-                <div className="text-white/80">info@professionalinstitute.com</div>
+                <div className="text-white/80">
+                  info@professionalinstitute.com
+                </div>
               </div>
 
               <div className="pt-4">

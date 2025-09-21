@@ -207,7 +207,7 @@ export const CoursesSection = () => {
         {/* Filter Tabs */}
         <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4 mb-8 lg:mb-12 animate-fade-up">
           {/* Category Filter */}
-          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
+          <div className="flex items-center justify-evenly bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
             <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Category:
             </span>
@@ -219,7 +219,7 @@ export const CoursesSection = () => {
                 className={`px-2 lg:px-4 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm whitespace-nowrap ${
                   categoryFilter === category
                     ? "gradient-primary text-white shadow-md"
-                    : "text-muted-foreground hover:text-primary"
+                    : "text-muted-foreground hover:gradient-primary hover:text-white"
                 }`}
               >
                 {category === "Renewable Energy"
@@ -232,7 +232,7 @@ export const CoursesSection = () => {
           </div>
 
           {/* Language Filter */}
-          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto">
+          <div className="flex items-center justify-evenly bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto">
             <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Language:
             </span>
@@ -244,7 +244,7 @@ export const CoursesSection = () => {
                 className={`px-3 lg:px-6 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm ${
                   languageFilter === lang
                     ? "gradient-primary text-white shadow-md"
-                    : "text-muted-foreground hover:text-primary"
+                    : "text-muted-foreground hover:gradient-primary hover:text-white"
                 }`}
               >
                 <Globe className="mr-1 lg:mr-2 h-3 lg:h-4 w-3 lg:w-4" />
@@ -254,7 +254,7 @@ export const CoursesSection = () => {
           </div>
 
           {/* Package Filter */}
-          <div className="flex bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
+          <div className="flex items-center justify-evenly bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
             <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
               Package:
             </span>
@@ -266,7 +266,7 @@ export const CoursesSection = () => {
                 className={`px-2 lg:px-4 py-1 lg:py-2 rounded-md lg:rounded-lg transition-all text-xs lg:text-sm whitespace-nowrap ${
                   packageFilter === pkg
                     ? "gradient-primary text-white shadow-md"
-                    : "text-muted-foreground hover:text-primary"
+                    : "text-muted-foreground hover:gradient-primary hover:text-white"
                 }`}
               >
                 {pkg}
@@ -280,7 +280,7 @@ export const CoursesSection = () => {
           {displayedCourses.map((course, index) => (
             <Card
               key={course.id}
-              className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 animate-scale-in border-0 shadow-card"
+              className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-scale-in border-0 shadow-card flex flex-col h-full"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardHeader className="p-0">
@@ -307,76 +307,78 @@ export const CoursesSection = () => {
                   </Badge>
                 </div>
               </CardHeader>
-              <CardContent className="p-6">
+              <CardContent className="p-6 flex flex-col flex-1">
                 <CardTitle className="text-xl mb-3 group-hover:text-primary transition-colors">
                   {course.title}
                 </CardTitle>
-                <p className="text-muted-foreground mb-4 line-clamp-2">
-                  {course.description}
-                </p>
 
-                {/* Price Section */}
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="flex items-center">
-                    <DollarSign className="h-4 w-4 text-primary" />
-                    <span className="text-2xl font-bold text-primary">
-                      ${course.discountPrice}
-                    </span>
-                    <span className="text-lg text-muted-foreground line-through ml-2">
-                      ${course.price}
-                    </span>
+                <div className="mt-auto">
+                  <p className="text-muted-foreground mb-4 line-clamp-2">
+                    {course.description}
+                  </p>
+
+                  {/* Price Section */}
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex items-center">
+                      <DollarSign className="h-4 w-4 text-primary" />
+                      <span className="text-2xl font-bold text-primary">
+                        ${course.discountPrice}
+                      </span>
+                      <span className="text-lg text-muted-foreground line-through ml-2">
+                        ${course.price}
+                      </span>
+                    </div>
+                    <Badge variant="destructive" className="text-xs">
+                      {Math.round(
+                        ((course.price - course.discountPrice) / course.price) *
+                          100
+                      )}
+                      % OFF
+                    </Badge>
                   </div>
-                  <Badge variant="destructive" className="text-xs">
-                    {Math.round(
-                      ((course.price - course.discountPrice) / course.price) *
-                        100
-                    )}
-                    % OFF
-                  </Badge>
+
+                  {/* Course Stats */}
+                  <div className="grid grid-cols-3 gap-4 text-sm text-muted-foreground mb-4">
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-1" />
+                      {course.duration}
+                    </div>
+                    <div className="flex items-center">
+                      <PlayCircle className="h-4 w-4 mr-1" />
+                      {course.lectures} lectures
+                    </div>
+                    <div className="flex items-center">
+                      <UserCheck className="h-4 w-4 mr-1" />
+                      {course.currentStudents}/{course.capacity}
+                    </div>
+                  </div>
+
+                  {/* Instructor */}
+                  <div className="flex items-center gap-2 mb-4 p-2 bg-muted/50 rounded-lg">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src={course.instructor.avatar}
+                        alt={course.instructor.name}
+                      />
+                      <AvatarFallback>
+                        {course.instructor.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-xs font-medium">Instructor</p>
+                      <p className="text-sm text-muted-foreground">
+                        {course.instructor.name}
+                      </p>
+                    </div>
+                  </div>
+                  <Button className="w-full gradient-primary text-white hover:scale-105 transition-transform">
+                    <BookOpen className="mr-2 h-4 w-4" />
+                    Enroll Now
+                  </Button>
                 </div>
-
-                {/* Course Stats */}
-                <div className="grid grid-cols-3 gap-4 text-sm text-muted-foreground mb-4">
-                  <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-1" />
-                    {course.duration}
-                  </div>
-                  <div className="flex items-center">
-                    <PlayCircle className="h-4 w-4 mr-1" />
-                    {course.lectures} lectures
-                  </div>
-                  <div className="flex items-center">
-                    <UserCheck className="h-4 w-4 mr-1" />
-                    {course.currentStudents}/{course.capacity}
-                  </div>
-                </div>
-
-                {/* Instructor */}
-                <div className="flex items-center gap-2 mb-4 p-2 bg-muted/50 rounded-lg">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      src={course.instructor.avatar}
-                      alt={course.instructor.name}
-                    />
-                    <AvatarFallback>
-                      {course.instructor.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-xs font-medium">Instructor</p>
-                    <p className="text-sm text-muted-foreground">
-                      {course.instructor.name}
-                    </p>
-                  </div>
-                </div>
-
-                <Button className="w-full gradient-primary text-white hover:scale-105 transition-transform">
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  Enroll Now
-                </Button>
               </CardContent>
             </Card>
           ))}
