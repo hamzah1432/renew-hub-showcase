@@ -1,157 +1,99 @@
 import { useState, useEffect } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { CourseCard } from "@/components/CourseCard";
+import { coursesApi } from "@/services/api";
+import { Course, InternalCourse, CourseCategory } from "@/types/course";
 import {
   BookOpen,
-  Clock,
-  Users,
   Globe,
-  PlayCircle,
-  UserCheck,
-  DollarSign,
+  Loader2,
 } from "lucide-react";
 
-const courses = [
-  {
-    id: 1,
-    title: "Mastering Energy Storage Systems Course (MESS) – English Version",
-    description:
-      "The “Mastering Energy Storage Systems Course” is a comprehensive program designed to equip participants with the knowledge and skills necessary to understand the fundamental principles and practical applications of energy storage systems. This course covers the technical and economic aspects of various energy storage technologies, including batteries, pumped hydro, thermal storage, and emerging innovations. Participants will explore infrastructure considerations, integration with renewable energy sources, and the potential applications of energy storage in different sectors.",
-    duration: "6 hours",
-    language: "English",
-    level: "All Levels",
-    package: "Bronze",
-    category: "Renewable Energy",
-    price: "400.00",
-    discountPrice: "80.00",
-    lectures: 8,
-    capacity: 100,
-    currentStudents: 59,
+// Extended course type for internal use with API categories
+type ExtendedInternalCourse = InternalCourse & { apiCategories: CourseCategory[] };
+
+// Function to convert API Course to InternalCourse
+const mapApiCourseToInternal = (apiCourse: Course): ExtendedInternalCourse => {
+  // Determine language based on English Courses category
+  const hasEnglishCategory = apiCourse.categories?.some(cat => 
+    cat.slug === 'english-courses' || cat.name.toLowerCase().includes('english')
+  );
+  const language = hasEnglishCategory ? 'English' : 'Arabic';
+
+  // Determine package based on category names containing package words
+  const packageNames = ["Bronze", "Silver", "Gold", "Diamond"];
+  let packageType = "Standard"; // Default package
+  
+  for (const pkg of packageNames) {
+    if (apiCourse.categories?.some(cat => 
+      cat.slug.toLowerCase().includes(pkg.toLowerCase()) || 
+      cat.name.toLowerCase().includes(pkg.toLowerCase())
+    )) {
+      packageType = pkg;
+      break;
+    }
+  }
+
+  return {
+    id: apiCourse.id,
+    title: apiCourse.name,
+    description: apiCourse.name, // API doesn't provide description, using name as fallback
+    duration: apiCourse.duration || "Not specified",
+    language: language,
+    level: "All Levels", // Default since API doesn't provide this
+    package: packageType,
+    category: apiCourse.categories?.[0]?.name || "General", // Use first category name or default
+    price: apiCourse.origin_price_rendered || apiCourse.price_rendered || "$0.00",
+    discountPrice: apiCourse.on_sale ? apiCourse.sale_price_rendered : apiCourse.price_rendered,
+    lectures: 1, // Default since API doesn't provide this
+    capacity: 100, // Default since API doesn't provide this
+    currentStudents: 0, // Default since API doesn't provide this
     instructor: {
-      name: "Tarek MERHBI",
-      avatar: "public/Tarek_MERHBI.png",
+      name: apiCourse.instructor?.name || "Unknown Instructor",
+      avatar: apiCourse.instructor?.avatar || "/placeholder.svg",
     },
-    image: "public/MESS_Course.png",
-  },
-  {
-    id: 2,
-    title:
-      "Advanced Solar Water Pumping Design and Installation Course (ASPDI) – English Version",
-    description:
-      "The Advanced Solar Water Pumping Design and Installation Course (ASPDI) – English Version provides participants with in-depth, hands-on training in designing, installing, and maintaining solar water pumping systems. Trainees will develop practical skills to assess site conditions, select appropriate components, design efficient solar pumping solutions, and execute installations with confidence. Through guided exercises, real-life case studies, and step-by-step instruction, participants will gain the expertise to implement reliable solar water pumping systems in diverse settings.",
-    duration: "2 hours",
-    language: "English",
-    level: "All Levels",
-    package: "Diamond",
-    category: "Renewable Energy",
-    price: "120.00",
-    discountPrice: "24.00",
-    lectures: 1,
-    capacity: 80,
-    currentStudents: 25,
-    instructor: {
-      name: "Awangum",
-      avatar: "public/Awangum.png",
-    },
-    image: "public/ASPDI_Course.png",
-  },
-  {
-    id: 3,
-    title:
-      "Hands-on Training course in Battery and Inverter Repairs Course (HTBIR) – English Version",
-    description:
-      "The Hands-on Training Course in Battery and Inverter Repairs equips participants with practical expertise to understand inverter and battery systems, diagnose common faults, troubleshoot problems step-by-step, and perform reliable maintenance and repair. Through real-life case studies and guided exercises, trainees gain the confidence and technical skills needed to repair and maintain power systems effectively.",
-    duration: "1 hour",
-    language: "English",
-    level: "All Levels",
-    package: "Gold",
-    category: "Renewable Energy",
-    price: "60.00",
-    discountPrice: "12.00",
-    lectures: 1,
-    capacity: 150,
-    currentStudents: 20,
-    instructor: {
-      name: "Charles Ekpima",
-      avatar: "public/Charles_Ekpima.png",
-    },
-    image: "public/HTBIR_Course.png",
-  },
-  {
-    id: 4,
-    title:
-      "3D Modeling Integration In Solar System Course (DMISS) – English Version",
-    description:
-      "The “3D Modeling Integration in Solar System (DMISS) Course” helps solar professionals transform standard 2D drawings into realistic, high-impact 3D visuals that win clients faster. In today’s market, showing clients exactly how their solar system will look on their property builds instant trust and sets you apart from competitors still relying on flat blueprints. This course equips you with the tools and techniques to create stunning, accurate, and professional 3D presentations that sell.",
-    duration: "7 hours",
-    language: "English",
-    level: "All Levels",
-    package: "Silver",
-    category: "Renewable Energy",
-    price: "325.00",
-    discountPrice: "65.00",
-    lectures: 22,
-    capacity: 100,
-    currentStudents: 25,
-    instructor: {
-      name: "Abdulrahman Al-Mashti",
-      avatar: "public/Abdulrahman_Almashti.png",
-    },
-    image: "public/DMISS_Course.png",
-  },
-  {
-    id: 5,
-    title:
-      "Professional Course in SCADA-Based Monitoring & Control for Solar Microgrid Systems (SMGCS) – English Version",
-    description:
-      "The “Professional Course in SCADA-Based Monitoring & Control for Solar Microgrid Systems (SMGCS)” provides participants with in-depth technical knowledge and practical skills in the design, setup, and operation of SCADA systems for solar microgrids. This course covers SCADA architecture, sensors and communication protocols, real-time performance monitoring, operational control strategies, and data analytics to ensure reliable, efficient, and safe management of solar microgrid assets.",
-    duration: "3 hours",
-    language: "English",
-    level: "All Levels",
-    package: "Bronze",
-    category: "Renewable Energy",
-    price: 200.0,
-    discountPrice: 40.0,
-    lectures: 3,
-    capacity: 100,
-    currentStudents: 36,
-    instructor: {
-      name: "Salem Al Khawaja",
-      avatar: "public/Salem_Al_Khawaja.jpeg",
-    },
-    image: "public/SMGCS_Course.png",
-  },
-  {
-    id: 6,
-    title:
-      "Mastering Solar String Inverter Sizing Course (MSSIS) – English Version",
-    description:
-      "The “Mastering Solar String Inverter Sizing” course is designed to equip participants with the essential knowledge and practical skills needed to accurately size and select string inverters for solar photovoltaic (PV) systems. The course covers inverter fundamentals, key sizing criteria, design calculations, and real-world application examples to ensure optimal system performance and compliance with industry standards.",
-    duration: "3 hours",
-    language: "English",
-    level: "All Levels",
-    package: "Gold",
-    category: "Electrical Power",
-    price: 140.0,
-    discountPrice: 55.0,
-    lectures: 9,
-    capacity: 150,
-    currentStudents: 87,
-    instructor: {
-      name: "Abdulrahman Smadi",
-      avatar: "public/Abdulrahman_Smadi.jpeg",
-    },
-    image: "public/MSSIC_Course.png",
-  },
-];
+    image: apiCourse.image || "/placeholder.svg",
+    onSale: apiCourse.on_sale,
+    apiCategories: apiCourse.categories, // Preserve original categories for filtering
+  };
+};
 
 export const CoursesSection = () => {
+  const [courses, setCourses] = useState<ExtendedInternalCourse[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [languageFilter, setLanguageFilter] = useState("All");
   const [packageFilter, setPackageFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [displayedCoursesCount, setDisplayedCoursesCount] = useState(3);
+
+  // Fetch courses from API
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        
+        setLoading(true);
+        const fetchedCourses = await coursesApi.getCourses();
+        // Filter courses to only include those with "home-page-courses" category
+        const homePageCourses = fetchedCourses.filter(course => 
+          course.categories && course.categories.some(category => 
+            category.slug === 'home-page-courses'
+          )
+        );
+        const mappedCourses = homePageCourses.map(mapApiCourseToInternal);
+        setCourses(mappedCourses);
+        setError(null);
+      } catch (err) {
+        setError('Failed to load courses. Please try again later.');
+        console.error('Error fetching courses:', err);
+      } finally {
+        setLoading(false);
+      }
+
+    };
+
+    fetchCourses();
+  }, []);
 
   // Reset displayed courses count when filters change
   useEffect(() => {
@@ -159,12 +101,43 @@ export const CoursesSection = () => {
   }, [languageFilter, packageFilter, categoryFilter]);
 
   const filteredCourses = courses.filter((course) => {
-    const languageMatch =
-      languageFilter === "All" || course.language === languageFilter;
-    const packageMatch =
-      packageFilter === "All" || course.package === packageFilter;
-    const categoryMatch =
-      categoryFilter === "All" || course.category === categoryFilter;
+    // Language filtering - if not "English Courses" category, it's Arabic
+    const hasEnglishCategory = course.apiCategories?.some(cat => 
+      cat.slug === 'english-courses' || cat.name.toLowerCase().includes('english')
+    );
+    const courseLanguage = hasEnglishCategory ? 'English' : 'Arabic';
+    const languageMatch = languageFilter === "All" || courseLanguage === languageFilter;
+
+    // Package filtering - based on package names in categories
+    const packageNames = ["Bronze", "Silver", "Gold", "Diamond"];
+    let coursePackage = "Standard"; // Default
+    
+    for (const pkg of packageNames) {
+      if (course.apiCategories?.some(cat => 
+        cat.slug.toLowerCase().includes(pkg.toLowerCase()) || 
+        cat.name.toLowerCase().includes(pkg.toLowerCase())
+      )) {
+        coursePackage = pkg;
+        break;
+      }
+    }
+    
+    const packageMatch = packageFilter === "All" || coursePackage === packageFilter;
+
+    // Category filtering - based on actual API categories
+    let categoryMatch = categoryFilter === "All";
+    if (!categoryMatch) {
+      if (categoryFilter === "Renewable Energy") {
+        categoryMatch = course.apiCategories?.some(cat => 
+          cat.slug.includes('renewable') || cat.name.toLowerCase().includes('renewable')
+        ) || false;
+      } else if (categoryFilter === "Electrical Power") {
+        categoryMatch = course.apiCategories?.some(cat => 
+          cat.slug.includes('electrical') || cat.name.toLowerCase().includes('electrical')
+        ) || false;
+      }
+    }
+
     return languageMatch && packageMatch && categoryMatch;
   });
 
@@ -173,21 +146,6 @@ export const CoursesSection = () => {
 
   const handleViewMore = () => {
     setDisplayedCoursesCount((prev) => prev + 3);
-  };
-
-  const getPackageStyle = (packageName: string) => {
-    switch (packageName) {
-      case "Bronze":
-        return "bg-amber-600 text-white";
-      case "Silver":
-        return "bg-slate-400 text-white";
-      case "Gold":
-        return "bg-yellow-500 text-white";
-      case "Diamond":
-        return "bg-blue-600 text-white";
-      default:
-        return "bg-primary text-white";
-    }
   };
 
   return (
@@ -204,8 +162,33 @@ export const CoursesSection = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4 mb-8 lg:mb-12 animate-fade-up">
+        {/* Loading State */}
+        {loading && (
+          <div className="text-center py-20">
+            <Loader2 className="h-12 w-12 animate-spin mx-auto text-primary mb-4" />
+            <p className="text-lg text-muted-foreground">Loading courses...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && !loading && (
+          <div className="text-center py-20">
+            <p className="text-lg text-red-600 mb-4">{error}</p>
+            <Button 
+              onClick={() => window.location.reload()} 
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-white"
+            >
+              Try Again
+            </Button>
+          </div>
+        )}
+
+        {/* Courses Content */}
+        {!loading && !error && courses.length > 0 && (
+          <>
+            {/* Filter Tabs */}
+            <div className="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-4 mb-8 lg:mb-12 animate-fade-up">
           {/* Category Filter */}
           <div className="flex items-center justify-evenly bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
             <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
@@ -278,109 +261,7 @@ export const CoursesSection = () => {
         {/* Courses Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
           {displayedCourses.map((course, index) => (
-            <Card
-              key={course.id}
-              className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 animate-scale-in border-0 shadow-card flex flex-col h-full"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardHeader className="p-0">
-                <div
-                  className="h-48 bg-cover bg-center rounded-t-lg relative overflow-hidden"
-                  style={{ backgroundImage: `url(${course.image})` }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent" />
-                  <Badge
-                    className={`absolute top-4 right-4 font-bold px-3 py-1 ${getPackageStyle(
-                      course.package
-                    )}`}
-                  >
-                    {course.package}
-                  </Badge>
-                  <Badge className="absolute top-4 left-4 gradient-primary text-white">
-                    {course.language}
-                  </Badge>
-                  <Badge
-                    variant="secondary"
-                    className="absolute bottom-4 left-4 bg-white/90 text-secondary"
-                  >
-                    {course.level}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 flex flex-col flex-1">
-                <CardTitle className="text-xl mb-3 group-hover:text-primary transition-colors">
-                  {course.title}
-                </CardTitle>
-
-                <div className="mt-auto">
-                  <p className="text-muted-foreground mb-4 line-clamp-2">
-                    {course.description}
-                  </p>
-
-                  {/* Price Section */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="flex items-center">
-                      <DollarSign className="h-4 w-4 text-primary" />
-                      <span className="text-2xl font-bold text-primary">
-                        ${course.discountPrice}
-                      </span>
-                      <span className="text-lg text-muted-foreground line-through ml-2">
-                        ${course.price}
-                      </span>
-                    </div>
-                    <Badge variant="destructive" className="text-xs">
-                      {Math.round(
-                        ((course.price - course.discountPrice) / course.price) *
-                          100
-                      )}
-                      % OFF
-                    </Badge>
-                  </div>
-
-                  {/* Course Stats */}
-                  <div className="grid grid-cols-3 gap-4 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      {course.duration}
-                    </div>
-                    <div className="flex items-center">
-                      <PlayCircle className="h-4 w-4 mr-1" />
-                      {course.lectures} lectures
-                    </div>
-                    <div className="flex items-center">
-                      <UserCheck className="h-4 w-4 mr-1" />
-                      {course.currentStudents}/{course.capacity}
-                    </div>
-                  </div>
-
-                  {/* Instructor */}
-                  <div className="flex items-center gap-2 mb-4 p-2 bg-muted/50 rounded-lg">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src={course.instructor.avatar}
-                        alt={course.instructor.name}
-                      />
-                      <AvatarFallback>
-                        {course.instructor.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-xs font-medium">Instructor</p>
-                      <p className="text-sm text-muted-foreground">
-                        {course.instructor.name}
-                      </p>
-                    </div>
-                  </div>
-                  <Button className="w-full gradient-primary text-white hover:scale-105 transition-transform">
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    Enroll Now
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <CourseCard key={course.id} course={course} index={index} />
           ))}
         </div>
 
@@ -388,7 +269,7 @@ export const CoursesSection = () => {
         {hasMoreCourses && (
           <div className="text-center mt-12 animate-fade-up">
             <Button
-              // onClick={handleViewMore}
+              onClick={handleViewMore}
               variant="outline"
               size="lg"
               className="px-8 py-3 text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
@@ -396,6 +277,15 @@ export const CoursesSection = () => {
               View More Courses
               <BookOpen className="ml-2 h-5 w-5" />
             </Button>
+          </div>
+        )}
+        </>
+        )}
+
+        {/* Empty State */}
+        {!loading && !error && courses.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-lg text-muted-foreground">No courses available at the moment.</p>
           </div>
         )}
       </div>
