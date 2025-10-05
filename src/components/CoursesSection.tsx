@@ -149,26 +149,32 @@ export const CoursesSection = () => {
   };
 
   return (
-    <section className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-up">
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
-            Our Courses
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Comprehensive renewable energy engineering programs designed by
-            industry experts to prepare you for a sustainable future career.
-          </p>
-        </div>
-
-        {/* Loading State */}
-        {loading && (
-          <div className="text-center py-20">
-            <Loader2 className="h-12 w-12 animate-spin mx-auto text-primary mb-4" />
-            <p className="text-lg text-muted-foreground">Loading courses...</p>
+    <>
+      {/* Full Screen Loading State */}
+      {loading && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="text-center">
+            <Loader2 className="h-16 w-16 animate-spin mx-auto text-primary mb-4" />
+            <p className="text-xl text-muted-foreground font-medium">Loading courses...</p>
+            <p className="text-sm text-muted-foreground/70 mt-2">Please wait while we fetch the latest content</p>
           </div>
-        )}
+        </div>
+      )}
+
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          {/* Section Header */}
+          {!loading && (
+            <div className="text-center mb-16 animate-fade-up">
+              <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+                Our Courses
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                Comprehensive renewable energy engineering programs designed by
+                industry experts to prepare you for a sustainable future career.
+              </p>
+            </div>
+          )}
 
         {/* Error State */}
         {error && !loading && (
@@ -288,7 +294,8 @@ export const CoursesSection = () => {
             <p className="text-lg text-muted-foreground">No courses available at the moment.</p>
           </div>
         )}
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 };
