@@ -9,7 +9,7 @@ const teamMembers = [
 		name: "Abdulrahman Smadi",
 		role: "Instructor",
 		specialization: "Solar Energy Systems",
-		image: "public/Abdulrahman_Smadi.jpeg",
+		image: "Abdulrahman_Smadi.jpeg",
 		linkedin: "https://www.linkedin.com/in/a-smadi/",
 	},
 	{
@@ -17,7 +17,7 @@ const teamMembers = [
 		name: "Abdulrahman Al-Mashti",
 		role: "Instructor",
 		specialization: "Solar Systems Modelling Expert",
-		image: "public/Abdulrahman_Almashti.png",
+		image: "Abdulrahman_Almashti.png",
 		linkedin: "",
 	},
 	{
@@ -25,7 +25,7 @@ const teamMembers = [
 		name: "Amaal Al-Khatatbeh",
 		role: "Instructor",
 		specialization: "Green Energy Solutions Specialist",
-		image: "public/Amaal_Al-Khatatbeh.png",
+		image: "Amaal_Al-Khatatbeh.png",
 		linkedin: "https://www.linkedin.com/in/amaal-al-khatatbeh/",
 	},
 	{
@@ -33,7 +33,7 @@ const teamMembers = [
 		name: "Anan Omar",
 		role: "Instructor",
 		specialization: "Solar PV Sales & Design Expert",
-		image: "public/Anan_Omar.jpeg",
+		image: "Anan_Omar.jpeg",
 		linkedin: "https://www.linkedin.com/in/anan-omar/",
 	},
 	{
@@ -41,7 +41,7 @@ const teamMembers = [
 		name: "Awangum",
 		role: "Instructor",
 		specialization: "Solar Water Pumping Systems Specialist",
-		image: "public/Awangum.png",
+		image: "Awangum.png",
 		linkedin: "",
 	},
 	{
@@ -49,7 +49,7 @@ const teamMembers = [
 		name: "Ayman Mousa",
 		role: "Instructor",
 		specialization: "Solar PV Systems Expert",
-		image: "public/Ayman_Mousa.jpeg",
+		image: "Ayman_Mousa.jpeg",
 		linkedin: "",
 	},
 	{
@@ -57,7 +57,7 @@ const teamMembers = [
 		name: "Charles Ekpima",
 		role: "Instructor",
 		specialization: "Solar Energy Repairs Trainer",
-		image: "public/Charles_Ekpima.png",
+		image: "Charles_Ekpima.png",
 		linkedin: "https://www.linkedin.com/in/charles-ekpima/",
 	},
 	{

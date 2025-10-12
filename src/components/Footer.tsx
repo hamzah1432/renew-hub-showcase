@@ -17,7 +17,7 @@ export const Footer = () => {
             <div className="flex items-center space-x-3">
               <div className="   rounded-lg flex items-center justify-center">
                 <img
-                  src="/PREI_logo.png"
+                  src="PREI_logo.png"
                   alt="Professional Renewable Energy Institute"
                   className="h-24  object-contain"
                 />
