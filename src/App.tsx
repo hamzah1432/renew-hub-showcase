@@ -1,11 +1,11 @@
 import { Header } from "@/components/Header";
-import { HeroSection } from "@/components/HeroSection";
 import { CoursesSection } from "@/components/CoursesSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { TeamSection } from "@/components/TeamSection";
 import { ClientsSection } from "@/components/ClientsSection";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { Footer } from "@/components/Footer";
+import { HeroSection } from "./components/HeroSection/HeroSection";
 
 const App = () => {
   return (
