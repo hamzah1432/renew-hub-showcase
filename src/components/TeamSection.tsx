@@ -103,13 +103,13 @@ const teamMembers = [
 ];
 
 export const TeamSection = () => {
-	const [displayedMembersCount, setDisplayedMembersCount] = useState(3);
+	const [displayedMembersCount, setDisplayedMembersCount] = useState(4);
 
 	const displayedMembers = teamMembers.slice(0, displayedMembersCount);
 	const hasMoreMembers = teamMembers.length > displayedMembersCount;
 
 	const handleViewMore = () => {
-		setDisplayedMembersCount((prev) => prev + 3);
+		setDisplayedMembersCount((prev) => prev + 4);
 	};
 
 	return (
@@ -128,11 +128,11 @@ export const TeamSection = () => {
 				</div>
 
 				{/* Team Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 					{displayedMembers.map((member, index) => (
 						<Card
 							key={member.id}
-							className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-card animate-scale-in overflow-hidden"
+							className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border-0 shadow-card animate-scale-in overflow-hidden"
 							style={{ animationDelay: `${index * 0.1}s` }}
 						>
 							<CardContent className="p-0">
@@ -141,36 +141,36 @@ export const TeamSection = () => {
 									<img
 										src={member.image}
 										alt={member.name}
-										className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+										className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
 									{/* Social Links - Appear on Hover */}
-									<div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+									<div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 										{member.linkedin && (
 											<a
 												href={member.linkedin}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors"
+												className="p-1.5 bg-white/90 rounded-full hover:bg-white transition-colors"
 											>
-												<LinkedinIcon className="h-4 w-4 text-primary" />
+												<LinkedinIcon className="h-3.5 w-3.5 text-primary" />
 											</a>
 										)}
 									</div>
 								</div>
 
 								{/* Member Info */}
-								<div className="p-6 text-center">
-									<h3 className="text-xl font-semibold text-secondary mb-2 group-hover:text-primary transition-colors">
+								<div className="p-4 text-center">
+									<h3 className="text-lg font-semibold text-secondary mb-1 group-hover:text-primary transition-colors">
 										{member.name}
 									</h3>
-									<p className="text-primary font-medium mb-2">
+									<p className="text-primary font-medium mb-1 text-sm">
 										{member.role}
 									</p>
-									<div className="flex items-center justify-center mb-3">
-										<Award className="h-4 w-4 text-muted-foreground mr-2" />
-										<p className="text-sm text-muted-foreground">
+									<div className="flex items-center justify-center">
+										<Award className="h-3.5 w-3.5 text-muted-foreground mr-1.5" />
+										<p className="text-xs text-muted-foreground">
 											{member.specialization}
 										</p>
 									</div>

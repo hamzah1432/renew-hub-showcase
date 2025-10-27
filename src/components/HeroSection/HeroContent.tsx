@@ -22,9 +22,7 @@ export const HeroContent = ({ slide, isActive }: HeroContentProps) => {
         }`}
         style={{ transitionDelay: isActive ? "200ms" : "0ms" }}
       >
-        <Badge className="gradient-primary text-white mb-4 hover:scale-110 transition-transform duration-300 shadow-lg">
-          Leading Renewable Energy Education
-        </Badge>
+
       </div>
       <h1
         className={`text-3xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight transition-all duration-1000 ease-out ${

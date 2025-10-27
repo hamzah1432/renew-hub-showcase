@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -52,23 +52,57 @@ const testimonials = [
 
 export const FeedbackSection = () => {
 	const [currentIndex, setCurrentIndex] = useState(2); // Start with Dr. Ali Al-Shehri
+	const [isPaused, setIsPaused] = useState(false);
+	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+	// Auto-scroll functionality
+	useEffect(() => {
+		if (!isPaused) {
+			intervalRef.current = setInterval(() => {
+				setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+			}, 4000); // Change testimonial every 4 seconds
+		}
+
+		return () => {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+		};
+	}, [isPaused]);
+
+	// Handle mouse enter/leave for pause functionality
+	const handleMouseEnter = () => {
+		setIsPaused(true);
+	};
+
+	const handleMouseLeave = () => {
+		setIsPaused(false);
+	};
 
 	const nextTestimonial = () => {
 		setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+		setIsPaused(true); // Pause auto-scroll when user manually navigates
+		setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
 	};
 
 	const prevTestimonial = () => {
 		setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+		setIsPaused(true); // Pause auto-scroll when user manually navigates
+		setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
 	};
 
 	const currentTestimonial = testimonials[currentIndex];
 
 	return (
-		<section className="py-20 bg-white">
+		<section 
+			className="py-20 bg-white"
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			<div className="container mx-auto px-4">
 				{/* Section Header */}
 				<div className="text-center mb-16 animate-fade-in">
-					<h2 className="text-4xl font-bold text-gray-800 mb-6">
+					<h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
 						Feedback
 					</h2>
 				</div>
@@ -81,12 +115,16 @@ export const FeedbackSection = () => {
 							className={`cursor-pointer transition-all duration-300 transform hover:scale-110 ${
 								index === currentIndex ? "opacity-100 scale-110" : "opacity-50 hover:opacity-75"
 							}`}
-							onClick={() => setCurrentIndex(index)}
+							onClick={() => {
+								setCurrentIndex(index);
+								setIsPaused(true); // Pause auto-scroll when user clicks
+								setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
+							}}
 						>
 							<img
 								src={testimonial.image}
 								alt={testimonial.name}
-								className="w-16 h-16 rounded-full object-cover border-2 border-gray-200 transition-all duration-300"
+								className="w-24 h-24 rounded-full object-cover border-2 border-gray-200 transition-all duration-300"
 							/>
 						</div>
 					))}
@@ -99,7 +137,7 @@ export const FeedbackSection = () => {
 						<h3 className="text-xl font-bold text-gray-800 mb-2 transition-all duration-500">
 							{currentTestimonial.name}
 						</h3>
-						<p className="text-gray-600 transition-all duration-500">
+						<p className="text-gray-600  transition-all duration-500">
 							{currentTestimonial.role}
 						</p>
 					</div>
@@ -137,7 +175,11 @@ export const FeedbackSection = () => {
 						{testimonials.map((_, index) => (
 							<button
 								key={index}
-								onClick={() => setCurrentIndex(index)}
+								onClick={() => {
+									setCurrentIndex(index);
+									setIsPaused(true); // Pause auto-scroll when user clicks
+									setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
+								}}
 								className={`w-2 h-2 rounded-full transition-all duration-300 ${
 									currentIndex === index ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
 								}`}

@@ -10,6 +10,7 @@ interface FeaturedCoursesProps {
   loading: boolean;
   isActive: boolean;
   coursesLoaded: boolean;
+  slideCategory?: string;
 }
 
 export const FeaturedCourses = ({
@@ -18,20 +19,23 @@ export const FeaturedCourses = ({
   loading,
   isActive,
   coursesLoaded,
+  slideCategory,
 }: FeaturedCoursesProps) => {
   // Helper function to get courses for current slide
-  const getCoursesForSlide = (slideIndex: number, count: number = 2) => {
+  const getCoursesForSlide = (count: number = 2) => {
     if (courses.length === 0) return [];
+    return courses.slice(0, count);
+  };
 
-    const startIndex = (slideIndex * count) % courses.length;
-    const coursesForSlide: Course[] = [];
-
-    for (let i = 0; i < count; i++) {
-      const courseIndex = (startIndex + i) % courses.length;
-      coursesForSlide.push(courses[courseIndex]);
+  const getHeaderText = () => {
+    switch (slideCategory) {
+      case "first-banner":
+        return "Courses on Discount";
+      case "second-banner":
+        return "Featured Solar Courses";
+      default:
+        return "Top Courses";
     }
-
-    return coursesForSlide;
   };
 
   return (
@@ -48,13 +52,17 @@ export const FeaturedCourses = ({
         style={{ transitionDelay: isActive ? "500ms" : "0ms" }}
       >
         <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
-          Top Courses
+          {getHeaderText()}
           <span className="text-sm md:text-base font-normal text-white/70 ml-2">
             ({currentSlide + 1}/3)
           </span>
         </h2>
         <p className="text-sm md:text-base text-white/80">
-          Most popular renewable energy programs
+          {slideCategory === "first-banner"
+            ? "Master solar energy technology"
+            : slideCategory === "second-banner"
+            ? "Advanced wind energy training"
+            : "Most popular renewable energy programs"}
         </p>
       </div>
 
@@ -68,7 +76,7 @@ export const FeaturedCourses = ({
       ) : (
         <div className="overflow-x-hidden space-y-3 md:space-y-4 max-h-80 md:max-h-96 overflow-y-auto pr-2">
           {/* Desktop: Show 2 courses */}
-          {getCoursesForSlide(currentSlide, 2).map((course, courseIndex) => (
+          {getCoursesForSlide(2).map((course, courseIndex) => (
             <Card
               key={`${course.id}-${currentSlide}`}
               className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] md:block hidden group ${
@@ -157,7 +165,7 @@ export const FeaturedCourses = ({
 
           {/* Mobile: Show only 1 simplified card */}
           <div className="md:hidden space-y-3">
-            {getCoursesForSlide(currentSlide, 1).map((course, courseIndex) => (
+            {getCoursesForSlide(1).map((course, courseIndex) => (
               <Card
                 key={`mobile-${course.id}-${currentSlide}`}
                 className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group ${

@@ -8,32 +8,37 @@ import { HeroSlide } from "./HeroSlide";
 import { HeroContent } from "./HeroContent";
 import { FeaturedCourses } from "./FeaturedCourses";
 import { HeroNavigation } from "./HeroNavigation";
+import { SpecialFeatures } from "./SpecialFeatures";
 
 const slides = [
   {
     id: 1,
+    image: heroWind,
+    title: "Discount Courses",
+    subtitle: "Explore top courses currently available at discounted prices",
+    categorySlug: "first-banner",
+  },
+  {
+    id: 2,
     image: heroSolar,
     title: "Master Solar Energy Engineering",
     subtitle:
       "Comprehensive courses in photovoltaic systems and solar technology",
-  },
-  {
-    id: 2,
-    image: heroWind,
-    title: "Wind Energy Solutions",
-    subtitle: "Advanced training in wind turbine design and implementation",
+    categorySlug: "second-banner",
   },
   {
     id: 3,
     image: heroLab,
     title: "Green Technology Innovation",
     subtitle: "Hands-on experience with cutting-edge renewable energy systems",
+    categorySlug: "special-features",
   },
 ];
 
 export const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [firstBannerCourses, setFirstBannerCourses] = useState<Course[]>([]);
+  const [secondBannerCourses, setSecondBannerCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
   const [coursesLoaded, setCoursesLoaded] = useState(false);
@@ -53,18 +58,29 @@ export const HeroSection = () => {
       try {
         setLoading(true);
         const fetchedCourses = await coursesApi.getCourses();
-        // Filter courses to only include those with "home-page-courses" category for featured display
-        const homePageCourses = fetchedCourses.filter(course =>
+
+        // Filter courses for first banner
+        const firstBanner = fetchedCourses.filter(course =>
           course.categories && course.categories.some(category =>
-            category.slug === 'home-page-courses'
+            category.slug === 'first-banner'
           )
         );
-        setCourses(homePageCourses.slice(0, 6)); // Limit to 6 courses for hero section
+        setFirstBannerCourses(firstBanner);
+
+        // Filter courses for second banner
+        const secondBanner = fetchedCourses.filter(course =>
+          course.categories && course.categories.some(category =>
+            category.slug === 'second-banner'
+          )
+        );
+        setSecondBannerCourses(secondBanner);
+
         // Delay to show smooth animation
         setTimeout(() => setCoursesLoaded(true), 300);
       } catch (err) {
         console.error('Error fetching courses:', err);
-        setCourses([]); // Set empty array on error
+        setFirstBannerCourses([]);
+        setSecondBannerCourses([]);
         setCoursesLoaded(true);
       } finally {
         setLoading(false);
@@ -73,6 +89,18 @@ export const HeroSection = () => {
 
     fetchCourses();
   }, []);
+
+  // Get courses for current slide
+  const getCoursesForCurrentSlide = () => {
+    switch (currentSlide) {
+      case 0:
+        return firstBannerCourses;
+      case 1:
+        return secondBannerCourses;
+      default:
+        return [];
+    }
+  };
 
   const nextSlide = () => {
     if (isAnimating) return;
@@ -109,18 +137,26 @@ export const HeroSection = () => {
             index={index}
             currentSlide={currentSlide}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            <div className="overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
               {/* Left Side - Main Content */}
               <HeroContent slide={slide} isActive={isActive} />
 
-              {/* Right Side - Featured Courses */}
-              <FeaturedCourses
-                courses={courses}
-                currentSlide={currentSlide}
-                loading={loading}
-                isActive={isActive}
-                coursesLoaded={coursesLoaded}
-              />
+              {/* Right Side - Content based on slide */}
+              {slide.categorySlug === "special-features" ? (
+                <SpecialFeatures
+                  isActive={isActive}
+                  currentSlide={currentSlide}
+                />
+              ) : (
+                <FeaturedCourses
+                  courses={getCoursesForCurrentSlide()}
+                  currentSlide={currentSlide}
+                  loading={loading}
+                  isActive={isActive}
+                  coursesLoaded={coursesLoaded}
+                  slideCategory={slide.categorySlug}
+                />
+              )}
             </div>
           </HeroSlide>
         );

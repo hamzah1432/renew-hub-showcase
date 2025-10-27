@@ -9,8 +9,19 @@ export interface MenuItemProps {
   href: string;
 }
 
+export interface CourseItem {
+  name: string;
+  href: string;
+}
+
+export interface CourseCategory {
+  name: string;
+  href: string;
+  courses: CourseItem[];
+}
+
 export interface CourseCategories {
-  [category: string]: string[];
+  [category: string]: CourseCategory;
 }
 
 export interface ContactInfo {

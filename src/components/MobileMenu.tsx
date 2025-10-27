@@ -46,39 +46,40 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen }: Mobil
                 {isMobileCoursesOpen && (
                   <div className="pl-4 space-y-3 border-l-2 border-primary/20">
                     {Object.entries(courseCategories).map(
-                      ([category, courses]) => (
-                        <div key={category} className="space-y-2">
+                      ([categoryKey, categoryData]) => (
+                        <div key={categoryKey} className="space-y-2">
                           <button
-                            onClick={() => toggleMobileSubmenu(category)}
+                            onClick={() => toggleMobileSubmenu(categoryKey)}
                             className="flex items-center justify-between w-full text-left p-2 hover:bg-gray-50 rounded"
                           >
                             <h4 className="text-sm font-medium text-gray-700">
-                              {category}
+                              {categoryData.name}
                             </h4>
                             <ChevronDown
                               className={`h-4 w-4 text-gray-400 transition-transform ${
-                                mobileSubmenus[category] ? "rotate-180" : ""
+                                mobileSubmenus[categoryKey] ? "rotate-180" : ""
                               }`}
                             />
                           </button>
 
                           {/* Mobile Submenu */}
-                          {mobileSubmenus[category] && (
+                          {mobileSubmenus[categoryKey] && (
                             <div className="space-y-1 ml-4 pl-3 border-l border-gray-200">
-                              {courses.map((course, courseIndex) => (
-                                <div
-                                  key={course}
-                                  className="text-xs p-2 hover:bg-gray-50 rounded cursor-pointer"
+                              {categoryData.courses.map((course, courseIndex) => (
+                                <a
+                                  key={course.href}
+                                  href={course.href}
+                                  className="text-xs p-2 hover:bg-gray-50 rounded cursor-pointer block"
                                 >
                                   <div className="font-medium text-gray-700">
-                                    {courseIndex + 1}. {course.split("–")[0].trim()}
+                                    {courseIndex + 1}. {course.name.split("–")[0].trim()}
                                   </div>
-                                  {course.includes("–") && (
+                                  {course.name.includes("–") && (
                                     <div className="text-gray-500 mt-1">
-                                      {course.split("–")[1].trim()}
+                                      {course.name.split("–")[1].trim()}
                                     </div>
                                   )}
-                                </div>
+                                </a>
                               ))}
                             </div>
                           )}

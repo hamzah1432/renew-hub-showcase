@@ -22,9 +22,9 @@ export const CourseDropdown = ({ isScrolled }: CourseDropdownProps) => {
       <div className="absolute top-full left-0 mt-1 w-[280px] bg-white rounded-md shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
         <div className="p-2">
           {Object.entries(courseCategories).map(
-            ([category, courses], categoryIndex) => (
+            ([categoryKey, categoryData], categoryIndex) => (
               <div
-                key={category}
+                key={categoryKey}
                 className={`relative group/submenu ${
                   categoryIndex > 0 ? "mt-1" : ""
                 }`}
@@ -32,7 +32,7 @@ export const CourseDropdown = ({ isScrolled }: CourseDropdownProps) => {
                 <div className="flex items-center justify-between p-2 rounded hover:bg-gray-50 cursor-pointer">
                   <div className="flex items-center">
                     <span className="text-sm font-medium text-gray-700">
-                      {category}
+                      {categoryData.name}
                     </span>
                   </div>
                   <ChevronDown className="h-4 w-4 text-gray-400 -rotate-90" />
@@ -43,24 +43,25 @@ export const CourseDropdown = ({ isScrolled }: CourseDropdownProps) => {
                   <div className="p-3">
                     <div className="mb-2">
                       <h3 className="text-sm font-semibold text-gray-800 pb-2 border-b">
-                        {category}
+                        {categoryData.name}
                       </h3>
                     </div>
                     <div className="space-y-1">
-                      {courses.map((course, courseIndex) => (
-                        <div
-                          key={course}
-                          className="cursor-pointer p-2 rounded hover:bg-gray-50"
+                      {categoryData.courses.map((course, courseIndex) => (
+                        <a
+                          key={course.href}
+                          href={course.href}
+                          className="cursor-pointer p-2 rounded hover:bg-gray-50 block"
                         >
                           <div className="text-sm text-gray-700">
-                            {courseIndex + 1}. {course.split("–")[0].trim()}
+                            {courseIndex + 1}. {course.name.split("–")[0].trim()}
                           </div>
-                          {course.includes("–") && (
+                          {course.name.includes("–") && (
                             <div className="text-xs text-gray-500 ml-3">
-                              {course.split("–")[1].trim()}
+                              {course.name.split("–")[1].trim()}
                             </div>
                           )}
-                        </div>
+                        </a>
                       ))}
                     </div>
                   </div>
