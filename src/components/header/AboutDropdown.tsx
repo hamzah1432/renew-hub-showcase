@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { aboutUsMenuItems } from "../data/navigationData";
+import { aboutUsMenuItems } from "../../data/navigationData";
 
 interface AboutDropdownProps {
   isScrolled: boolean;

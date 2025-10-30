@@ -1,11 +1,10 @@
 import { NavigationItem, MenuItemProps, CourseCategories, ContactInfo } from "../types/navigation";
 
 export const navigation: NavigationItem[] = [
-  { name: "Home", href: "#home" },
+  { name: "Home", href: "/" },
   { name: "Courses", href: "#courses", hasDropdown: true },
   { name: "Institutional Accreditation", href: "#about" },
   { name: "Business Growth", href: "#team" },
-  { name: "News", href: "#news" },
   { name: "Get to know us", href: "#contact", hasDropdown: true },
 ];
 

@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { courseCategories } from "../data/navigationData";
+import { courseCategories } from "../../data/navigationData";
 
 interface CourseDropdownProps {
   isScrolled: boolean;

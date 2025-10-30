@@ -3,7 +3,7 @@ import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
 import { MobileMenuButton } from "./MobileMenuButton";
 import { MobileMenu } from "./MobileMenu";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, ChevronDown } from "lucide-react";
-import { navigation, courseCategories, aboutUsMenuItems, contactInfo } from "../data/navigationData";
+import { navigation, courseCategories, aboutUsMenuItems, contactInfo } from "../../data/navigationData";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;

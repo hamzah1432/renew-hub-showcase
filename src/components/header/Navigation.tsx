@@ -1,6 +1,6 @@
-import { CourseDropdown } from "./CourseDropdown";
+import { navigation } from "../../data/navigationData";
 import { AboutDropdown } from "./AboutDropdown";
-import { navigation } from "../data/navigationData";
+import { CourseDropdown } from "./CourseDropdown";
 
 interface NavigationProps {
   isScrolled: boolean;
