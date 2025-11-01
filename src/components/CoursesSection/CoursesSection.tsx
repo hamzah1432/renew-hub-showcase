@@ -1,94 +1,98 @@
 import { useState, useEffect } from "react";
-import { coursesApi } from "@/services/api";
+import { useCourses } from "@/contexts/CourseContext";
 import { Course, InternalCourse, CourseCategory } from "@/types/course";
 import { FilterTabs } from "./FilterTabs";
 import { CoursesGrid } from "./CoursesGrid";
 import { LoadingState } from "./LoadingState";
 import { ErrorState } from "./ErrorState";
 
-// Extended course type for internal use with API categories
-type ExtendedInternalCourse = InternalCourse & { apiCategories: CourseCategory[] };
-
-// Function to convert API Course to InternalCourse
-const mapApiCourseToInternal = (apiCourse: Course): ExtendedInternalCourse => {
-  // Determine language based on English Courses category
-  const hasEnglishCategory = apiCourse.categories?.some(cat => 
+// Helper functions to reduce code duplication
+const getLanguageFromCategories = (categories: CourseCategory[] = []): string => {
+  return categories.some(cat => 
     cat.slug === 'english-courses' || cat.name.toLowerCase().includes('english')
-  );
-  const language = hasEnglishCategory ? 'English' : 'Arabic';
+  ) ? 'English' : 'Arabic';
+};
 
-  // Determine package based on category names containing package words
+const getPackageFromCategories = (categories: CourseCategory[] = []): string => {
   const packageNames = ["Bronze", "Silver", "Gold", "Diamond"];
-  let packageType = "Standard"; // Default package
   
   for (const pkg of packageNames) {
-    if (apiCourse.categories?.some(cat => 
+    if (categories.some(cat => 
       cat.slug.toLowerCase().includes(pkg.toLowerCase()) || 
       cat.name.toLowerCase().includes(pkg.toLowerCase())
     )) {
-      packageType = pkg;
-      break;
+      return pkg;
     }
   }
+  return "Standard";
+};
+
+const getCategoryMatch = (categories: CourseCategory[] = [], filter: string): boolean => {
+  if (filter === "All") return true;
+  
+  const filterMap: Record<string, string[]> = {
+    "Renewable Energy": ['renewable'],
+    "Electrical Power": ['electrical']
+  };
+  
+  const keywords = filterMap[filter];
+  if (!keywords) return false;
+  
+  return categories.some(cat => 
+    keywords.some(keyword => 
+      cat.slug.includes(keyword) || cat.name.toLowerCase().includes(keyword)
+    )
+  );
+};
+
+// Extended course type for internal use with API categories
+type ExtendedInternalCourse = InternalCourse & { categories: CourseCategory[] };
+
+// Function to convert API Course to InternalCourse
+const mapApiCourseToInternal = (apiCourse: Course): ExtendedInternalCourse => {
+  const language = getLanguageFromCategories(apiCourse.categories);
+  const packageType = getPackageFromCategories(apiCourse.categories);
 
   return {
     id: apiCourse.id,
     title: apiCourse.name,
-    description: apiCourse.name, // API doesn't provide description, using name as fallback
+    description: apiCourse.name,
     duration: apiCourse.duration || "Not specified",
-    language: language,
-    level: "All Levels", // Default since API doesn't provide this
+    language,
+    level: "All Levels",
     package: packageType,
-    category: apiCourse.categories?.[0]?.name || "General", // Use first category name or default
+    category: apiCourse.categories?.[0]?.name || "General",
     price: apiCourse.origin_price_rendered || apiCourse.price_rendered || "$0.00",
     discountPrice: apiCourse.on_sale ? apiCourse.sale_price_rendered : apiCourse.price_rendered,
-    lectures: 1, // Default since API doesn't provide this
-    capacity: 100, // Default since API doesn't provide this
-    currentStudents: 0, // Default since API doesn't provide this
+    lectures: 1,
+    capacity: 100,
+    currentStudents: 0,
     instructor: {
       name: apiCourse.instructor?.name || "Unknown Instructor",
       avatar: apiCourse.instructor?.avatar || "/placeholder.svg",
     },
     image: apiCourse.image || "/placeholder.svg",
     onSale: apiCourse.on_sale,
-    apiCategories: apiCourse.categories, // Preserve original categories for filtering
+    categories: apiCourse.categories || [],
   };
 };
 
 export const CoursesSection = () => {
+  const { getHomePageCourses, loading, error } = useCourses();
   const [courses, setCourses] = useState<ExtendedInternalCourse[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const [languageFilter, setLanguageFilter] = useState("All");
   const [packageFilter, setPackageFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [displayedCoursesCount, setDisplayedCoursesCount] = useState(3);
 
-  // Fetch courses from API
+  // Process courses from context when they're available
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setLoading(true);
-        const fetchedCourses = await coursesApi.getCourses();
-        // Filter courses to only include those with "home-page-courses" category
-        const homePageCourses = fetchedCourses.filter(course => 
-          course.categories && course.categories.some(category => 
-            category.slug === 'home-page-courses'
-          )
-        );
-        const mappedCourses = homePageCourses.map(mapApiCourseToInternal);
-        setCourses(mappedCourses);
-        setError(null);
-      } catch (err) {
-        setError('Failed to load courses. Please try again later.');
-        console.error('Error fetching courses:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
+    if (!loading) {
+      const homePageCourses = getHomePageCourses();
+      const mappedCourses = homePageCourses.map(mapApiCourseToInternal);
+      setCourses(mappedCourses);
+    }
+  }, [loading, getHomePageCourses]);
 
   // Reset displayed courses count when filters change
   useEffect(() => {
@@ -96,42 +100,9 @@ export const CoursesSection = () => {
   }, [languageFilter, packageFilter, categoryFilter]);
 
   const filteredCourses = courses.filter((course) => {
-    // Language filtering - if not "English Courses" category, it's Arabic
-    const hasEnglishCategory = course.apiCategories?.some(cat => 
-      cat.slug === 'english-courses' || cat.name.toLowerCase().includes('english')
-    );
-    const courseLanguage = hasEnglishCategory ? 'English' : 'Arabic';
-    const languageMatch = languageFilter === "All" || courseLanguage === languageFilter;
-
-    // Package filtering - based on package names in categories
-    const packageNames = ["Bronze", "Silver", "Gold", "Diamond"];
-    let coursePackage = "Standard"; // Default
-    
-    for (const pkg of packageNames) {
-      if (course.apiCategories?.some(cat => 
-        cat.slug.toLowerCase().includes(pkg.toLowerCase()) || 
-        cat.name.toLowerCase().includes(pkg.toLowerCase())
-      )) {
-        coursePackage = pkg;
-        break;
-      }
-    }
-    
-    const packageMatch = packageFilter === "All" || coursePackage === packageFilter;
-
-    // Category filtering - based on actual API categories
-    let categoryMatch = categoryFilter === "All";
-    if (!categoryMatch) {
-      if (categoryFilter === "Renewable Energy") {
-        categoryMatch = course.apiCategories?.some(cat => 
-          cat.slug.includes('renewable') || cat.name.toLowerCase().includes('renewable')
-        ) || false;
-      } else if (categoryFilter === "Electrical Power") {
-        categoryMatch = course.apiCategories?.some(cat => 
-          cat.slug.includes('electrical') || cat.name.toLowerCase().includes('electrical')
-        ) || false;
-      }
-    }
+    const languageMatch = languageFilter === "All" || course.language === languageFilter;
+    const packageMatch = packageFilter === "All" || course.package === packageFilter;
+    const categoryMatch = getCategoryMatch(course.categories, categoryFilter);
 
     return languageMatch && packageMatch && categoryMatch;
   });

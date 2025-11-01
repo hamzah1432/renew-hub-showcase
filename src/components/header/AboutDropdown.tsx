@@ -25,10 +25,11 @@ export const AboutDropdown = ({ isScrolled, scrollToSection }: AboutDropdownProp
           {aboutUsMenuItems.map((menuItem) => (
             <button
               key={menuItem.name}
-              onClick={() => scrollToSection(menuItem.href)}
               className="w-full text-left p-2 rounded hover:bg-gray-50 text-sm text-gray-700 hover:text-primary transition-colors"
             >
+              <a href={menuItem.href}>
               {menuItem.name}
+              </a>
             </button>
           ))}
         </div>

@@ -4,7 +4,7 @@ import { BookOpen } from "lucide-react";
 import { InternalCourse, CourseCategory } from "@/types/course";
 
 // Extended course type for internal use with API categories
-type ExtendedInternalCourse = InternalCourse & { apiCategories: CourseCategory[] };
+type ExtendedInternalCourse = InternalCourse & { categories: CourseCategory[] };
 
 interface CoursesGridProps {
   displayedCourses: ExtendedInternalCourse[];

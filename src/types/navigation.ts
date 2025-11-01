@@ -1,4 +1,5 @@
 export interface NavigationItem {
+  key: string;
   name: string;
   href: string;
   hasDropdown?: boolean;

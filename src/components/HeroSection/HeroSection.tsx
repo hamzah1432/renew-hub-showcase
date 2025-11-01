@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { coursesApi } from "@/services/api";
+import { useCourses } from "@/contexts/CourseContext";
 import { Course } from "@/types/course";
 import heroSolar from "@/assets/hero-solar.jpg";
 import heroWind from "@/assets/hero-wind.jpg";
@@ -36,10 +36,10 @@ const slides = [
 ];
 
 export const HeroSection = () => {
+  const { getFirstBannerCourses, getSecondBannerCourses, loading } = useCourses();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [firstBannerCourses, setFirstBannerCourses] = useState<Course[]>([]);
   const [secondBannerCourses, setSecondBannerCourses] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
   const [coursesLoaded, setCoursesLoaded] = useState(false);
 
@@ -52,43 +52,19 @@ export const HeroSection = () => {
     return () => clearInterval(timer);
   }, [isAnimating]);
 
-  // Fetch courses from API
+  // Process courses from context when they're available
   useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setLoading(true);
-        const fetchedCourses = await coursesApi.getCourses();
-
-        // Filter courses for first banner
-        const firstBanner = fetchedCourses.filter(course =>
-          course.categories && course.categories.some(category =>
-            category.slug === 'first-banner'
-          )
-        );
-        setFirstBannerCourses(firstBanner);
-
-        // Filter courses for second banner
-        const secondBanner = fetchedCourses.filter(course =>
-          course.categories && course.categories.some(category =>
-            category.slug === 'second-banner'
-          )
-        );
-        setSecondBannerCourses(secondBanner);
-
-        // Delay to show smooth animation
-        setTimeout(() => setCoursesLoaded(true), 300);
-      } catch (err) {
-        console.error('Error fetching courses:', err);
-        setFirstBannerCourses([]);
-        setSecondBannerCourses([]);
-        setCoursesLoaded(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
+    if (!loading) {
+      const firstBanner = getFirstBannerCourses();
+      const secondBanner = getSecondBannerCourses();
+      
+      setFirstBannerCourses(firstBanner);
+      setSecondBannerCourses(secondBanner);
+      
+      // Delay to show smooth animation
+      setTimeout(() => setCoursesLoaded(true), 300);
+    }
+  }, [loading, getFirstBannerCourses, getSecondBannerCourses]);
 
   // Get courses for current slide
   const getCoursesForCurrentSlide = () => {
@@ -102,26 +78,17 @@ export const HeroSection = () => {
     }
   };
 
-  const nextSlide = () => {
-    if (isAnimating) return;
+  // Helper function to handle slide changes with animation
+  const changeSlide = (newIndex: number) => {
+    if (isAnimating || newIndex === currentSlide) return;
     setIsAnimating(true);
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide(newIndex);
     setTimeout(() => setIsAnimating(false), 1000);
   };
 
-  const prevSlide = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setTimeout(() => setIsAnimating(false), 1000);
-  };
-
-  const goToSlide = (index: number) => {
-    if (isAnimating || index === currentSlide) return;
-    setIsAnimating(true);
-    setCurrentSlide(index);
-    setTimeout(() => setIsAnimating(false), 1000);
-  };
+  const nextSlide = () => changeSlide((currentSlide + 1) % slides.length);
+  const prevSlide = () => changeSlide((currentSlide - 1 + slides.length) % slides.length);
+  const goToSlide = (index: number) => changeSlide(index);
 
   return (
     <section className=" relative h-screen overflow-hidden">

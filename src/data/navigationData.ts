@@ -1,11 +1,11 @@
 import { NavigationItem, MenuItemProps, CourseCategories, ContactInfo } from "../types/navigation";
 
 export const navigation: NavigationItem[] = [
-  { name: "Home", href: "/" },
-  { name: "Courses", href: "#courses", hasDropdown: true },
-  { name: "Institutional Accreditation", href: "#about" },
-  { name: "Business Growth", href: "#team" },
-  { name: "Get to know us", href: "#contact", hasDropdown: true },
+  { key: "home", name: "Home", href: "/" },
+  { key: "courses", name: "Courses", href: "#courses", hasDropdown: true },
+  { key: "institutional-accreditation", name: "Institutional Accreditation", href: "https://professional-institute.com/course-category/institutional-accreditation/" },
+  { key: "business-growth", name: "Business Growth", href: "https://professional-institute.com/course-category/business-growth/" },
+  { key: "get-to-know-us", name: "Get to know us", href: "", hasDropdown: true },
 ];
 
 export const courseCategories: CourseCategories = {
@@ -54,9 +54,9 @@ export const courseCategories: CourseCategories = {
 };
 
 export const aboutUsMenuItems: MenuItemProps[] = [
-  { name: "About Us", href: "#about" },
-  { name: "Become an Instructor", href: "#instructor" },
-  { name: "Contact Us", href: "#contact" },
+  { name: "About Us", href: "https://professional-institute.com/about-us/" },
+  { name: "Become an Instructor", href: "https://professional-institute.com/become-an-instructor/" },
+  { name: "Contact Us", href: "https://professional-institute.com/contact/" },
 ];
 
 export const contactInfo: ContactInfo = {
