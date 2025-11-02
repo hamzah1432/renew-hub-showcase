@@ -11,6 +11,7 @@ interface CourseContextType {
   getFirstBannerCourses: () => Course[];
   getSecondBannerCourses: () => Course[];
   getCoursesByCategory: (categorySlug: string) => Course[];
+  getCoursesByDiscount: (discountPercentage: number) => Course[];
   refetchCourses: () => Promise<void>;
 }
 
@@ -28,13 +29,11 @@ export const CourseProvider: React.FC<CourseProviderProps> = ({ children }) => {
   const fetchCourses = async () => {
     try {
       setLoading(true);
-      console.log('Fetching courses from API...');
       setError(null);
       const courses = await coursesApi.getCourses();
       setAllCourses(courses);
     } catch (err) {
       setError('Failed to load courses. Please try again later.');
-      console.error('Error fetching courses:', err);
       setAllCourses([]);
     } finally {
       setLoading(false);
@@ -57,6 +56,27 @@ export const CourseProvider: React.FC<CourseProviderProps> = ({ children }) => {
   const getFirstBannerCourses = () => getCoursesByCategory('first-banner');
   const getSecondBannerCourses = () => getCoursesByCategory('second-banner');
 
+  // Helper function to calculate discount percentage and filter courses
+  const getCoursesByDiscount = (discountPercentage: number) => {
+    return allCourses.filter(course => {
+      // Only consider courses that are on sale
+      if (!course.on_sale) return false;
+
+      // Parse origin price and sale price
+      const originPrice = parseFloat(course.origin_price);
+      const salePrice = course.sale_price;
+
+      // Validate prices
+      if (isNaN(originPrice) || originPrice <= 0 || salePrice <= 0) return false;
+
+      // Calculate actual discount percentage
+      const actualDiscount = ((originPrice - salePrice) / originPrice) * 100;
+
+      // Check if actual discount is within ±1% of target discount
+      return Math.abs(actualDiscount - discountPercentage) <= 1;
+    });
+  };
+
   const refetchCourses = async () => {
     await fetchCourses();
   };
@@ -69,6 +89,7 @@ export const CourseProvider: React.FC<CourseProviderProps> = ({ children }) => {
     getFirstBannerCourses,
     getSecondBannerCourses,
     getCoursesByCategory,
+    getCoursesByDiscount,
     refetchCourses,
   };
 

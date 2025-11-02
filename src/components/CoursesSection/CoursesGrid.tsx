@@ -20,7 +20,7 @@ export const CoursesGrid = ({
   return (
     <>
       {/* Courses Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
         {displayedCourses.map((course, index) => (
           <CourseCard key={course.id} course={course} index={index} />
         ))}
@@ -28,15 +28,15 @@ export const CoursesGrid = ({
 
       {/* View More Button */}
       {hasMoreCourses && (
-        <div className="text-center mt-12 animate-fade-up">
+        <div className="text-center mt-8 sm:mt-10 md:mt-12 animate-fade-up">
           <Button
             onClick={onViewMore}
             variant="outline"
             size="lg"
-            className="px-8 py-3 text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+            className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 text-base sm:text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
           >
             View More Courses
-            <BookOpen className="ml-2 h-5 w-5" />
+            <BookOpen className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
           </Button>
         </div>
       )}

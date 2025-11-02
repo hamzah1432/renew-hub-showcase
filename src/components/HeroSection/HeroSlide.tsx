@@ -37,8 +37,8 @@ export const HeroSlide = ({ slide, isActive, index, currentSlide, children }: He
           }`}
         />
 
-        {/* Animated particles overlay */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
+        {/* Animated particles overlay - Hidden on mobile for performance */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none hidden md:block">
           <div
             className="absolute top-1/4 left-1/4 w-2 h-2 bg-white rounded-full animate-ping"
             style={{ animationDelay: "0s", animationDuration: "3s" }}
@@ -58,7 +58,7 @@ export const HeroSlide = ({ slide, isActive, index, currentSlide, children }: He
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
+        <div className="relative z-10 container mx-auto px-4 py-8 md:py-0 h-full flex items-center">
           {children}
         </div>
       </div>

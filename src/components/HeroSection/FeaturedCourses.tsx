@@ -1,4 +1,4 @@
-import { BookOpen, Clock, Users, Loader2 } from "lucide-react";
+import { BookOpen, Clock, Users, Loader2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ interface FeaturedCoursesProps {
   isActive: boolean;
   coursesLoaded: boolean;
   slideCategory?: string;
+  discount?: number;
 }
 
 export const FeaturedCourses = ({
@@ -20,6 +21,7 @@ export const FeaturedCourses = ({
   isActive,
   coursesLoaded,
   slideCategory,
+  discount,
 }: FeaturedCoursesProps) => {
   // Helper function to get courses for current slide
   const getCoursesForSlide = (count: number = 2) => {
@@ -28,6 +30,9 @@ export const FeaturedCourses = ({
   };
 
   const getHeaderText = () => {
+    if (discount) {
+      return `${discount}% Off Courses`;
+    }
     switch (slideCategory) {
       case "first-banner":
         return "Courses on Discount";
@@ -43,21 +48,21 @@ export const FeaturedCourses = ({
       className={`transition-all duration-1000 ease-out ${
         isActive ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
       }`}
-      style={{ transitionDelay: isActive ? "300ms" : "0ms" }}
+      style={{ transitionDelay: isActive ? "300ms" : "0ms", scrollbarWidth:"none" }}
     >
       <div
-        className={`mb-4 md:mb-6 transition-all duration-1000 ease-out ${
+        className={`mb-4 md:mb-5 lg:mb-6 transition-all duration-1000 ease-out ${
           isActive ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
         }`}
         style={{ transitionDelay: isActive ? "500ms" : "0ms" }}
       >
-        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
           {getHeaderText()}
-          <span className="text-sm md:text-base font-normal text-white/70 ml-2">
+          <span className="text-xs md:text-sm lg:text-base font-normal text-white/70 ml-2">
             ({currentSlide + 1}/3)
           </span>
         </h2>
-        <p className="text-sm md:text-base text-white/80">
+        <p className="text-sm md:text-sm lg:text-base text-white/80">
           {slideCategory === "first-banner"
             ? "Master solar energy technology"
             : slideCategory === "second-banner"
@@ -74,12 +79,15 @@ export const FeaturedCourses = ({
           </div>
         </div>
       ) : (
-        <div className="overflow-x-hidden space-y-3 md:space-y-4 max-h-80 md:max-h-96 overflow-y-auto pr-2">
-          {/* Desktop: Show 2 courses */}
+        <div className="overflow-hidden space-y-3 md:space-y-4 max-h-80 md:max-h-96  pr-2">
+          {/* Show courses based on screen size */}
           {getCoursesForSlide(2).map((course, courseIndex) => (
             <Card
               key={`${course.id}-${currentSlide}`}
-              className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] md:block hidden group ${
+              className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] group ${
+                // Mobile: hidden, Tablet (768-1023): show only first course, Desktop (1024+): show both courses
+                courseIndex === 0 ? 'md:block hidden' : 'lg:block hidden'
+              } ${
                 coursesLoaded && isActive
                   ? "translate-x-0 opacity-100"
                   : "translate-x-8 opacity-0"
@@ -88,10 +96,10 @@ export const FeaturedCourses = ({
                 transitionDelay: isActive ? `${700 + courseIndex * 150}ms` : "0ms",
               }}
             >
-              <CardContent className="overflow-x-hidden p-3 md:p-4">
+              <CardContent className="overflow-x-hidden p-3 md:p-4 lg:p-4">
                 <div className="flex gap-3 md:gap-4">
                   <div
-                    className="w-16 md:w-20 h-12 md:h-16 bg-cover bg-center rounded-lg flex-shrink-0 overflow-hidden group-hover:scale-110 transition-transform duration-500"
+                    className="w-16 md:w-20 lg:w-20 h-12 md:h-16 lg:h-16 bg-cover bg-center rounded-lg flex-shrink-0 overflow-hidden group-hover:scale-110 transition-transform duration-500"
                     style={{
                       backgroundImage: `url(${course.image || "/placeholder.svg"})`,
                     }}
@@ -127,7 +135,7 @@ export const FeaturedCourses = ({
                           <Clock className="h-3 w-3 mr-1" />
                           {course.duration || "Flexible"}
                         </div>
-                        <div className="hidden md:flex items-center">
+                        <div className="hidden lg:flex items-center">
                           <Users className="h-3 w-3 mr-1" />
                           Online
                         </div>
@@ -139,7 +147,7 @@ export const FeaturedCourses = ({
                               {course.sale_price_rendered}
                             </span>
                             <span className="text-xs text-muted-foreground line-through ml-1">
-                              {course.price_rendered}
+                              {course.origin_price_rendered}
                             </span>
                           </div>
                         ) : (
@@ -150,10 +158,11 @@ export const FeaturedCourses = ({
                         <Button
                           size="sm"
                           className="gradient-primary text-white text-xs px-2 md:px-3 py-1 h-6 md:h-7 mt-1 hover:scale-110 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 group/btn"
+                          onClick={() => window.location.href = course.link || '#'}
                         >
                           <BookOpen className="mr-1 h-3 w-3 group-hover/btn:rotate-12 transition-transform duration-300" />
-                          <span className="hidden md:inline">Enroll Now</span>
-                          <span className="md:hidden">Enroll</span>
+                          <span className="hidden lg:inline">Enroll Now</span>
+                          <span className="lg:hidden">Enroll</span>
                         </Button>
                       </div>
                     </div>
@@ -227,6 +236,7 @@ export const FeaturedCourses = ({
                           <Button
                             size="sm"
                             className="gradient-primary text-white text-xs px-2 py-1 h-6 mt-1 hover:scale-110 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
+                            onClick={() => window.location.href = course.link || '#'}
                           >
                             Enroll
                           </Button>
@@ -238,6 +248,30 @@ export const FeaturedCourses = ({
               </Card>
             ))}
           </div>
+
+          {/* View All Call-to-Action Button */}
+          {discount && courses.length > 0 && (
+            <div
+              className={`mt-4 transition-all duration-1000 ease-out ${
+                coursesLoaded && isActive
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-4 opacity-0"
+              }`}
+              style={{
+                transitionDelay: isActive ? "1000ms" : "0ms",
+              }}
+            >
+              <Button
+                className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold"
+                onClick={() => {
+                  window.location.href = `/#courses?discount=${discount}`;
+                }}
+              >
+                View All {discount}% Off Courses
+                <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>

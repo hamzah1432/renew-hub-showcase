@@ -12,7 +12,7 @@ export const HeroNavigation = ({
   goToSlide,
 }: HeroNavigationProps) => {
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+    <div className="absolute bottom-4 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 z-20 flex space-x-2 md:space-x-3">
       {slides.map((_, index) => (
         <button
           key={index}
@@ -20,8 +20,8 @@ export const HeroNavigation = ({
           disabled={isAnimating}
           className={`relative overflow-hidden rounded-full transition-all duration-500 hover:scale-125 group disabled:cursor-not-allowed ${
             index === currentSlide
-              ? "w-8 h-3 bg-white"
-              : "w-3 h-3 bg-white/50 hover:bg-white/70"
+              ? "w-6 md:w-8 h-2.5 md:h-3 bg-white"
+              : "w-2.5 md:w-3 h-2.5 md:h-3 bg-white/50 hover:bg-white/70"
           }`}
         >
           {index === currentSlide && (

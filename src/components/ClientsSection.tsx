@@ -98,14 +98,14 @@ export const ClientsSection = () => {
 	}, [currentIndex]);
 
 	return (
-		<section className="py-20 bg-background">
+		<section className="py-12 md:py-16 lg:py-20 bg-background">
 			<div className="container mx-auto px-4">
 				{/* Section Header */}
-				<div className="text-center mb-16 animate-fade-up">
-					<h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+				<div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-up">
+					<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-3 md:mb-4 lg:mb-6">
 						Our Clients & Partners
 					</h2>
-					<p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+					<p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
 						Trusted by leading renewable energy companies and organizations
 						worldwide for professional development and training programs.
 					</p>
@@ -114,23 +114,23 @@ export const ClientsSection = () => {
 				{/* Slider Container */}
 				<div className="relative max-w-4xl mx-auto">
 					{/* Navigation Controls */}
-					<div className="flex items-center justify-between mb-8">
-						<div className="flex items-center gap-4">
+					<div className="flex items-center justify-between mb-6 md:mb-8">
+						<div className="flex items-center gap-2 md:gap-4">
 							<Button
 								variant="outline"
 								size="icon"
 								onClick={prevSlide}
-								className="h-12 w-12 rounded-full border-green-100 hover:border-green-200 hover:bg-green-25 text-green-600"
+								className="h-10 w-10 md:h-12 md:w-12 rounded-full border-green-100 hover:border-green-200 hover:bg-green-25 text-green-600"
 							>
-								<ChevronLeft className="h-6 w-6" />
+								<ChevronLeft className="h-5 w-5 md:h-6 md:w-6" />
 							</Button>
 							<Button
 								variant="outline"
 								size="icon"
 								onClick={nextSlide}
-								className="h-12 w-12 rounded-full border-green-100 hover:border-green-200 hover:bg-green-25 text-green-600"
+								className="h-10 w-10 md:h-12 md:w-12 rounded-full border-green-100 hover:border-green-200 hover:bg-green-25 text-green-600"
 							>
-								<ChevronRight className="h-6 w-6" />
+								<ChevronRight className="h-5 w-5 md:h-6 md:w-6" />
 							</Button>
 						</div>
 
@@ -138,30 +138,30 @@ export const ClientsSection = () => {
 					</div>
 
 					{/* Logos Slider */}
-					<div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-green-25 to-emerald-25 dark:from-green-950/10 dark:to-emerald-950/10 p-12 border border-green-50 dark:border-green-900/20">
+					<div className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-r from-green-25 to-emerald-25 dark:from-green-950/10 dark:to-emerald-950/10 p-6 md:p-8 lg:p-12 border border-green-50 dark:border-green-900/20">
 						<div
 							ref={scrollRef}
-							className="flex gap-12 overflow-hidden"
+							className="flex gap-6 md:gap-8 lg:gap-12 overflow-hidden"
 							onMouseEnter={stopAutoScroll}
 							onMouseLeave={() => isPlaying && startAutoScroll()}
 						>
 							{clients.map((client, index) => (
 								<div
 									key={index}
-									className="flex-shrink-0  flex items-center justify-center bg-white/80 dark:bg-gray-800/80 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 opacity-90 hover:opacity-100 hover:scale-105 border border-green-50 dark:border-green-800/30 backdrop-blur-sm"
+									className="flex-shrink-0 flex items-center justify-center bg-white/80 dark:bg-gray-800/80 rounded-xl md:rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 opacity-90 hover:opacity-100 hover:scale-105 border border-green-50 dark:border-green-800/30 backdrop-blur-sm"
 								>
 									<img
 										src={client.logo}
 										alt={client.name}
 										width={200}
-										className="max-w-full max-h-full object-contain p-6"
+										className="max-w-full max-h-full object-contain p-4 md:p-6"
 										onError={(e) => {
 											// Fallback to text if logo fails to load
 											const target = e.target as HTMLImageElement;
 											target.style.display = "none";
 											const parent = target.parentElement;
 											if (parent) {
-												parent.innerHTML = `<div class="text-lg font-semibold text-muted-foreground text-center px-6">${client.name}</div>`;
+												parent.innerHTML = `<div class="text-base md:text-lg font-semibold text-muted-foreground text-center px-4 md:px-6">${client.name}</div>`;
 											}
 										}}
 									/>
@@ -171,12 +171,12 @@ export const ClientsSection = () => {
 					</div>
 
 					{/* Dots Indicator */}
-					<div className="flex justify-center mt-8 gap-3">
+					<div className="flex justify-center mt-6 md:mt-8 gap-2 md:gap-3">
 						{Array.from({ length: maxIndex + 1 }).map((_, index) => (
 							<button
 								key={index}
 								onClick={() => goToSlide(index)}
-								className={`w-4 h-4 rounded-full transition-all duration-300 ${
+								className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 ${
 									index === currentIndex
 										? "bg-green-400 scale-125 shadow-lg shadow-green-200"
 										: "bg-green-100 hover:bg-green-200"
@@ -188,11 +188,11 @@ export const ClientsSection = () => {
 				</div>
 
 				{/* Stats Section */}
-				<div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-16">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8 mt-12 md:mt-16">
 					{[
 						{ number: "500+", label: "Corporate Partners", color: "text-green-700 dark:text-green-300", bg: "bg-green-50 dark:bg-green-950/30" },
 						{ number: "50+", label: "Countries Served", color: "text-green-600 dark:text-green-400", bg: "bg-green-100 dark:bg-green-900/30" },
-						{ number: "10,000+", label: "Professionals Trained", color: "text-green-500 dark:text-green-500", bg: "bg-green-200 dark:bg-green-800/30" },
+						{ number: "20,000+", label: "Professionals Trained", color: "text-green-500 dark:text-green-500", bg: "bg-green-200 dark:bg-green-800/30" },
 						{ number: "95%", label: "Satisfaction Rate", color: "text-green-800 dark:text-green-200", bg: "bg-green-75 dark:bg-green-950/40" },
 					].map((stat, index) => (
 						<div
@@ -200,12 +200,12 @@ export const ClientsSection = () => {
 							className="text-center animate-scale-in group"
 							style={{ animationDelay: `${index * 0.1}s` }}
 						>
-							<div className={`mx-auto w-fit px-6 py-4 rounded-2xl ${stat.bg} border-2 border-transparent group-hover:border-current group-hover:scale-105 transition-all duration-300 mb-4`}>
-								<div className={`text-4xl md:text-5xl font-bold ${stat.color} mb-2`}>
+							<div className={`mx-auto w-fit px-4 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl ${stat.bg} border-2 border-transparent group-hover:border-current group-hover:scale-105 transition-all duration-300 mb-3 md:mb-4`}>
+								<div className={`text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold ${stat.color} mb-1 md:mb-2`}>
 									{stat.number}
 								</div>
 							</div>
-							<div className="text-muted-foreground font-medium group-hover:text-foreground transition-colors duration-300">
+							<div className="text-xs md:text-sm lg:text-base text-muted-foreground font-medium group-hover:text-foreground transition-colors duration-300 px-2">
 								{stat.label}
 							</div>
 						</div>

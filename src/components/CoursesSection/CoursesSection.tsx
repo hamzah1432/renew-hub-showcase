@@ -14,13 +14,17 @@ const getLanguageFromCategories = (categories: CourseCategory[] = []): string =>
 };
 
 const getPackageFromCategories = (categories: CourseCategory[] = []): string => {
-  const packageNames = ["Bronze", "Silver", "Gold", "Diamond"];
+  const packageNames = ["bronze-package", "silver-package", "gold-package", "Diamond"];
   
   for (const pkg of packageNames) {
     if (categories.some(cat => 
       cat.slug.toLowerCase().includes(pkg.toLowerCase()) || 
       cat.name.toLowerCase().includes(pkg.toLowerCase())
     )) {
+      // Return display name instead of slug
+      if (pkg === "bronze-package") return "Bronze";
+      if (pkg === "silver-package") return "Silver";
+      if (pkg === "gold-package") return "Gold";
       return pkg;
     }
   }
@@ -74,6 +78,7 @@ const mapApiCourseToInternal = (apiCourse: Course): ExtendedInternalCourse => {
     image: apiCourse.image || "/placeholder.svg",
     onSale: apiCourse.on_sale,
     categories: apiCourse.categories || [],
+    link: apiCourse.link || "#",
   };
 };
 
@@ -92,7 +97,7 @@ export const CoursesSection = () => {
       const mappedCourses = homePageCourses.map(mapApiCourseToInternal);
       setCourses(mappedCourses);
     }
-  }, [loading, getHomePageCourses]);
+  }, [loading, getHomePageCourses,]);
 
   // Reset displayed courses count when filters change
   useEffect(() => {
@@ -119,15 +124,15 @@ export const CoursesSection = () => {
       {/* Full Screen Loading State */}
       {loading && <LoadingState />}
 
-      <section className="py-20 bg-muted/30">
+      <section className="py-12 md:py-16 lg:py-20 bg-muted/30">
         <div className="container mx-auto px-4">
           {/* Section Header */}
           {!loading && (
-            <div className="text-center mb-16 animate-fade-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+            <div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-up">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-3 md:mb-4 lg:mb-6">
                 Our Courses
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
                 Comprehensive renewable energy engineering programs designed by
                 industry experts to prepare you for a sustainable future career.
               </p>

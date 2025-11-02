@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, ChevronDown } from "lucide-react";
-import { navigation, courseCategories, aboutUsMenuItems, contactInfo } from "../../data/navigationData";
+import { navigation, aboutUsMenuItems, contactInfo } from "../../data/navigationData";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
   scrollToSection: (href: string) => void;
   setIsMenuOpen: (isOpen: boolean) => void;
+  selectedCourses?: {
+    [key: string]: {
+      name: string;
+      courses: Array<{ name: string; href: string }>;
+    };
+  };
 }
 
-export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen }: MobileMenuProps) => {
+export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen, selectedCourses }: MobileMenuProps) => {
   const [isMobileCoursesOpen, setIsMobileCoursesOpen] = useState(false);
   const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
   const [mobileSubmenus, setMobileSubmenus] = useState<{ [key: string]: boolean }>({});
@@ -24,7 +30,7 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen }: Mobil
   if (!isMenuOpen) return null;
 
   return (
-    <div className="md:hidden bg-white border-t shadow-lg animate-fade-up">
+    <div className="md:hidden bg-white border-t shadow-lg animate-fade-up max-h-[80vh] overflow-y-auto">
       <nav className="px-4 py-4 space-y-4">
         {navigation.map((item) => {
           if (item.hasDropdown && item.name === "Courses") {
@@ -43,9 +49,9 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen }: Mobil
                 </button>
 
                 {/* Mobile Courses Dropdown */}
-                {isMobileCoursesOpen && (
+                {isMobileCoursesOpen && selectedCourses && (
                   <div className="pl-4 space-y-3 border-l-2 border-primary/20">
-                    {Object.entries(courseCategories).map(
+                    {Object.entries(selectedCourses).map(
                       ([categoryKey, categoryData]) => (
                         <div key={categoryKey} className="space-y-2">
                           <button
@@ -64,7 +70,7 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen }: Mobil
 
                           {/* Mobile Submenu */}
                           {mobileSubmenus[categoryKey] && (
-                            <div className="space-y-1 ml-4 pl-3 border-l border-gray-200">
+                            <div className="space-y-1 ml-4 pl-3 border-l border-gray-200 max-h-[300px] overflow-y-auto">
                               {categoryData.courses.map((course, courseIndex) => (
                                 <a
                                   key={course.href}

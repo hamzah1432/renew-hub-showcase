@@ -1,28 +1,29 @@
-import { navigation, courseCategories } from "../../data/navigationData";
+import { navigation } from "../../data/navigationData";
 import { AboutDropdown } from "./AboutDropdown";
 import { CourseDropdown } from "./CourseDropdown";
 
 interface NavigationProps {
   isScrolled: boolean;
   scrollToSection: (href: string) => void;
+  selectedCourses?: {
+    [key: string]: {
+      name: string;
+      courses: Array<{ name: string; href: string }>;
+    };
+  };
 }
 
-export const Navigation = ({ isScrolled, scrollToSection }: NavigationProps) => {
-  // New variable for category
-  const category = "renewable-energy/";
-  
-  // Log all courses with renewable energy category
-  const renewableEnergyCourses = courseCategories["Renewable Energy Courses"];
-  if (renewableEnergyCourses) {
-    console.log(`Courses in category "${category}":`, renewableEnergyCourses.courses);
-  }
-
+export const Navigation = ({ isScrolled, scrollToSection, selectedCourses }: NavigationProps) => {
   return (
     <nav className="hidden md:flex items-center space-x-8">
       {navigation.map((item) => {
         if (item.hasDropdown && item.name === "Courses") {
           return (
-            <CourseDropdown key={item.key} isScrolled={isScrolled} />
+            <CourseDropdown 
+              key={item.key} 
+              isScrolled={isScrolled}
+              selectedCourses={selectedCourses}
+            />
           );
         }
 

@@ -15,16 +15,18 @@ const slides = [
     id: 1,
     image: heroWind,
     title: "Discount Courses",
-    subtitle: "Explore top courses currently available at discounted prices",
+    subtitle: "Explore top courses currently available at 80% discount",
     categorySlug: "first-banner",
+    discount: 80,
   },
   {
     id: 2,
     image: heroSolar,
     title: "Master Solar Energy Engineering",
     subtitle:
-      "Comprehensive courses in photovoltaic systems and solar technology",
+      "Comprehensive courses in photovoltaic systems at 60% discount",
     categorySlug: "second-banner",
+    discount: 60,
   },
   {
     id: 3,
@@ -36,7 +38,7 @@ const slides = [
 ];
 
 export const HeroSection = () => {
-  const { getFirstBannerCourses, getSecondBannerCourses, loading } = useCourses();
+  const { getCoursesByDiscount, getCoursesByCategory, loading } = useCourses();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [firstBannerCourses, setFirstBannerCourses] = useState<Course[]>([]);
   const [secondBannerCourses, setSecondBannerCourses] = useState<Course[]>([]);
@@ -48,15 +50,24 @@ export const HeroSection = () => {
       if (!isAnimating) {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
       }
-    }, 5000);
+    }, 80000);
     return () => clearInterval(timer);
   }, [isAnimating]);
 
   // Process courses from context when they're available
   useEffect(() => {
     if (!loading) {
-      const firstBanner = getFirstBannerCourses();
-      const secondBanner = getSecondBannerCourses();
+      // Try to get courses with 80% discount, fallback to category
+      let firstBanner = getCoursesByDiscount(80);
+      if (firstBanner.length === 0) {
+        firstBanner = getCoursesByCategory('first-banner');
+      }
+      
+      // Try to get courses with 60% discount, fallback to category
+      let secondBanner = getCoursesByDiscount(60);
+      if (secondBanner.length === 0) {
+        secondBanner = getCoursesByCategory('second-banner');
+      }
       
       setFirstBannerCourses(firstBanner);
       setSecondBannerCourses(secondBanner);
@@ -64,7 +75,7 @@ export const HeroSection = () => {
       // Delay to show smooth animation
       setTimeout(() => setCoursesLoaded(true), 300);
     }
-  }, [loading, getFirstBannerCourses, getSecondBannerCourses]);
+  }, [loading, getCoursesByDiscount, getCoursesByCategory]);
 
   // Get courses for current slide
   const getCoursesForCurrentSlide = () => {
@@ -86,12 +97,10 @@ export const HeroSection = () => {
     setTimeout(() => setIsAnimating(false), 1000);
   };
 
-  const nextSlide = () => changeSlide((currentSlide + 1) % slides.length);
-  const prevSlide = () => changeSlide((currentSlide - 1 + slides.length) % slides.length);
   const goToSlide = (index: number) => changeSlide(index);
 
   return (
-    <section className=" relative h-screen overflow-hidden">
+    <section className="relative min-h-screen h-auto lg:h-screen overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => {
         const isActive = index === currentSlide;
@@ -104,7 +113,7 @@ export const HeroSection = () => {
             index={index}
             currentSlide={currentSlide}
           >
-            <div className="overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            <div className="overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 xl:gap-12 items-center w-full">
               {/* Left Side - Main Content */}
               <HeroContent slide={slide} isActive={isActive} />
 
@@ -122,6 +131,7 @@ export const HeroSection = () => {
                   isActive={isActive}
                   coursesLoaded={coursesLoaded}
                   slideCategory={slide.categorySlug}
+                  discount={slide.discount}
                 />
               )}
             </div>

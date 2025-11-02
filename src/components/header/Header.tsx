@@ -3,7 +3,7 @@ import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
 import { MobileMenuButton } from "./MobileMenuButton";
 import { MobileMenu } from "./MobileMenu";
-import { Button } from "../ui/button";
+import { courseCategories } from "@/data/navigationData";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,6 +19,9 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const category = "renewable-energy/";
+
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -26,6 +29,19 @@ export const Header = () => {
     }
     setIsMenuOpen(false);
   };
+
+  const renewableEnergyCourses = courseCategories["Renewable Energy Courses"];
+  const electricalPowerCourses = courseCategories["Electrical Power Courses"];
+  const webinars = courseCategories["Webinars"];
+  const workshops = courseCategories["workshops"];
+  
+  const selectedCourses = {
+    "Renewable Energy Courses": renewableEnergyCourses,
+    "Electrical Power Courses": electricalPowerCourses,
+    "Webinars": webinars,
+    "Workshops": workshops,
+  };
+
 
   return (
     <header
@@ -40,13 +56,17 @@ export const Header = () => {
           <Logo />
 
           {/* Desktop Navigation */}
-          <Navigation isScrolled={isScrolled} scrollToSection={scrollToSection} />
+          <Navigation 
+            isScrolled={isScrolled} 
+            scrollToSection={scrollToSection}
+            selectedCourses={selectedCourses}
+          />
 
           {/* Desktop CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <Button className="gradient-primary text-white hover:scale-105 transition-transform">
+            {/* <Button className="gradient-primary text-white hover:scale-105 transition-transform">
               Login
-            </Button>
+            </Button> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -63,6 +83,7 @@ export const Header = () => {
         isMenuOpen={isMenuOpen}
         scrollToSection={scrollToSection}
         setIsMenuOpen={setIsMenuOpen}
+        selectedCourses={selectedCourses}
       />
     </header>
   );

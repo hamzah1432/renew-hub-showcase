@@ -95,24 +95,24 @@ export const FeedbackSection = () => {
 
 	return (
 		<section 
-			className="py-20 bg-white"
+			className="py-12 md:py-16 lg:py-20 bg-white"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
 			<div className="container mx-auto px-4">
 				{/* Section Header */}
-				<div className="text-center mb-16 animate-fade-in">
-					<h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+				<div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-in">
+					<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-3 md:mb-4 lg:mb-6">
 						Feedback
 					</h2>
 				</div>
 
 				{/* Profile Images Row */}
-				<div className="flex justify-center items-center space-x-6 mb-12">
+				<div className="flex justify-center items-center space-x-3 md:space-x-4 lg:space-x-6 mb-8 md:mb-12 overflow-x-auto pb-2">
 					{testimonials.map((testimonial, index) => (
 						<div
 							key={testimonial.id}
-							className={`cursor-pointer transition-all duration-300 transform hover:scale-110 ${
+							className={`cursor-pointer transition-all duration-300 transform hover:scale-110 flex-shrink-0 ${
 								index === currentIndex ? "opacity-100 scale-110" : "opacity-50 hover:opacity-75"
 							}`}
 							onClick={() => {
@@ -124,7 +124,7 @@ export const FeedbackSection = () => {
 							<img
 								src={testimonial.image}
 								alt={testimonial.name}
-								className="w-24 h-24 rounded-full object-cover border-2 border-gray-200 transition-all duration-300"
+								className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full object-cover border-2 border-gray-200 transition-all duration-300"
 							/>
 						</div>
 					))}
@@ -133,20 +133,20 @@ export const FeedbackSection = () => {
 				{/* Active Testimonial Display */}
 				<div className="max-w-3xl mx-auto">
 					{/* Name and Role */}
-					<div className="text-center mb-8 animate-fade-in" key={currentIndex}>
-						<h3 className="text-xl font-bold text-gray-800 mb-2 transition-all duration-500">
+					<div className="text-center mb-6 md:mb-8 animate-fade-in px-4" key={currentIndex}>
+						<h3 className="text-lg md:text-xl font-bold text-gray-800 mb-2 transition-all duration-500">
 							{currentTestimonial.name}
 						</h3>
-						<p className="text-gray-600  transition-all duration-500">
+						<p className="text-sm md:text-base text-gray-600 transition-all duration-500">
 							{currentTestimonial.role}
 						</p>
 					</div>
 
 					{/* Testimonial Card */}
 					<Card className="border shadow-sm transition-all duration-500 animate-slide-up" key={`card-${currentIndex}`}>
-						<CardContent className="p-8">
+						<CardContent className="p-4 md:p-6 lg:p-8">
 							<div className="text-center">
-								<p className="text-gray-700 text-lg leading-relaxed italic">
+								<p className="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed italic">
 									{currentTestimonial.feedback}
 								</p>
 							</div>
@@ -154,24 +154,24 @@ export const FeedbackSection = () => {
 					</Card>
 
 					{/* Navigation Arrows */}
-					<div className="flex justify-center space-x-4 mt-8">
+					<div className="flex justify-center space-x-3 md:space-x-4 mt-6 md:mt-8">
 						<button
 							onClick={prevTestimonial}
-							className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:scale-105 active:scale-95"
+							className="p-2 md:p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:scale-105 active:scale-95"
 						>
-							<ChevronLeft className="h-5 w-5 text-gray-600" />
+							<ChevronLeft className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
 						</button>
 
 						<button
 							onClick={nextTestimonial}
-							className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:scale-105 active:scale-95"
+							className="p-2 md:p-2.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:scale-105 active:scale-95"
 						>
-							<ChevronRight className="h-5 w-5 text-gray-600" />
+							<ChevronRight className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
 						</button>
 					</div>
 
 					{/* Dots Indicator */}
-					<div className="flex justify-center space-x-2 mt-6">
+					<div className="flex justify-center space-x-2 mt-4 md:mt-6">
 						{testimonials.map((_, index) => (
 							<button
 								key={index}
@@ -180,7 +180,7 @@ export const FeedbackSection = () => {
 									setIsPaused(true); // Pause auto-scroll when user clicks
 									setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
 								}}
-								className={`w-2 h-2 rounded-full transition-all duration-300 ${
+								className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
 									currentIndex === index ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
 								}`}
 							/>

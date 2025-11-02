@@ -51,23 +51,23 @@ export const SpecialFeatures = ({ isActive, currentSlide }: SpecialFeaturesProps
       style={{ transitionDelay: isActive ? "300ms" : "0ms", scrollbarWidth: 'none' }}
     >
       <div
-        className={`mb-4 md:mb-6 transition-all duration-1000 ease-out ${
+        className={`mb-4 md:mb-5 lg:mb-6 transition-all duration-1000 ease-out ${
           isActive ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
         }`}
         style={{ transitionDelay: isActive ? "500ms" : "0ms" }}
       >
-        <h2 className="text-xl md:text-3xl font-bold text-white mb-2">
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
           What Makes Us Special?
-          <span className="text-sm md:text-base font-normal text-white/70 ml-2">
+          <span className="text-xs md:text-sm lg:text-base font-normal text-white/70 ml-2">
             ({currentSlide + 1}/3)
           </span>
         </h2>
-        <p className="text-sm md:text-base text-white/80">
+        <p className="text-sm md:text-sm lg:text-base text-white/80">
           Discover why we're the leading choice for renewable energy education
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-h-80 md:max-h-96 overflow-y-auto pr-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-h-80 md:max-h-96 overflow-hidden pr-2">
         {specialFeatures.map((feature, featureIndex) => {
           const IconComponent = feature.icon;
           

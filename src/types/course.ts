@@ -39,6 +39,7 @@ export type Course = {
   sale_price_rendered: string;
   rating: boolean;
   meta_data: CourseMetaData;
+  link?: string;
 };
 
 // Internal course type for the component (converted from API response)
@@ -62,4 +63,5 @@ export type InternalCourse = {
   };
   image: string;
   onSale: boolean;
+  link: string;
 };

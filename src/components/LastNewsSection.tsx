@@ -18,7 +18,6 @@ export const LastNewsSection = () => {
         setPosts(fetchedPosts);
       } catch (err) {
         setError('Failed to load posts');
-        console.error('Error fetching posts:', err);
       } finally {
         setLoading(false);
       }
@@ -86,17 +85,17 @@ export const LastNewsSection = () => {
   }
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-12 md:py-16 lg:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-up">
-          <div className="flex items-center justify-center mb-4">
-            <Newspaper className="h-8 w-8 text-primary mr-3" />
-            <h2 className="text-4xl md:text-5xl font-bold text-secondary">
+        <div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-up">
+          <div className="flex items-center justify-center mb-3 md:mb-4">
+            <Newspaper className="h-6 w-6 md:h-7 md:w-7 lg:h-8 lg:w-8 text-primary mr-2 md:mr-3" />
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary">
               Latest News & Updates
             </h2>
           </div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
             Stay informed with the latest developments in renewable energy technology, 
             industry insights, and educational updates from our expert team.
           </p>
@@ -104,7 +103,7 @@ export const LastNewsSection = () => {
 
         {/* Posts Grid */}
         {posts.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12">
             {posts.map((post, index) => (
               <div
                 key={post.id}
@@ -117,7 +116,7 @@ export const LastNewsSection = () => {
           </div>
         ) : (
           <div className="text-center py-8">
-            <p className="text-lg text-muted-foreground">No posts available at the moment.</p>
+            <p className="text-base md:text-lg text-muted-foreground">No posts available at the moment.</p>
           </div>
         )}
 
@@ -125,11 +124,11 @@ export const LastNewsSection = () => {
         <div className="text-center animate-fade-up" style={{ animationDelay: '0.5s' }}>
           <Button 
             size="lg" 
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-3 text-lg font-semibold group"
+            className="bg-primary hover:bg-primary/90 text-white px-6 md:px-8 py-2 md:py-3 text-base md:text-lg font-semibold group"
             onClick={handleViewAllNews}
           >
             View All News
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform duration-300" />
           </Button>
         </div>
       </div>

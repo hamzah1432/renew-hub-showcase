@@ -7,14 +7,36 @@ const WP_API_BASE_URL = "https://professional-institute.com/wp-json/wp/v2";
 export const coursesApi = {
   async getCourses(): Promise<Course[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/courses?per_page=100`);
+      // Fetch course data from LearnPress API
+      const learnPressResponse = await fetch(`${API_BASE_URL}/courses?per_page=100`);
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!learnPressResponse.ok) {
+        throw new Error(`HTTP error! status: ${learnPressResponse.status}`);
       }
       
-      const data = await response.json();
-      return data;
+      const learnPressData = await learnPressResponse.json();
+      
+      // Fetch course links from WordPress API
+      const wpResponse = await fetch(`${WP_API_BASE_URL}/lp_course?per_page=100`);
+      
+      if (!wpResponse.ok) {
+        console.warn('WordPress API request failed, continuing without links');
+        return learnPressData;
+      }
+      
+      const wpData = await wpResponse.json();
+      
+      // Create a map of course ID to link
+      const linkMap = new Map(
+        wpData.map((course: any) => [course.id, course.link])
+      );
+      
+      // Merge the data
+      return learnPressData.map((course: Course) => ({
+        ...course,
+        link: linkMap.get(course.id) || '#'
+      }));
+      
     } catch (error) {
       console.error('Error fetching courses:', error);
       throw error;

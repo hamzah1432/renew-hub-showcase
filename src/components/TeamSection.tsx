@@ -113,14 +113,14 @@ export const TeamSection = () => {
 	};
 
 	return (
-		<section className="py-20 bg-muted/30">
+		<section className="py-12 md:py-16 lg:py-20 bg-muted/30">
 			<div className="container mx-auto px-4">
 				{/* Section Header */}
-				<div className="text-center mb-16 animate-fade-up">
-					<h2 className="text-4xl md:text-5xl font-bold text-secondary mb-6">
+				<div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-up">
+					<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-3 md:mb-4 lg:mb-6">
 						Meet Our Team
 					</h2>
-					<p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+					<p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
 						Our world-class instructors bring decades of industry experience and
 						academic excellence to deliver the highest quality renewable energy
 						education.
@@ -128,7 +128,7 @@ export const TeamSection = () => {
 				</div>
 
 				{/* Team Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
 					{displayedMembers.map((member, index) => (
 						<Card
 							key={member.id}
@@ -141,7 +141,7 @@ export const TeamSection = () => {
 									<img
 										src={member.image}
 										alt={member.name}
-										className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+										className="w-full h-40 sm:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-t from-secondary/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -161,16 +161,16 @@ export const TeamSection = () => {
 								</div>
 
 								{/* Member Info */}
-								<div className="p-4 text-center">
-									<h3 className="text-lg font-semibold text-secondary mb-1 group-hover:text-primary transition-colors">
+								<div className="p-3 md:p-4 text-center">
+									<h3 className="text-base md:text-lg font-semibold text-secondary mb-1 group-hover:text-primary transition-colors">
 										{member.name}
 									</h3>
-									<p className="text-primary font-medium mb-1 text-sm">
+									<p className="text-primary font-medium mb-1 text-xs md:text-sm">
 										{member.role}
 									</p>
 									<div className="flex items-center justify-center">
-										<Award className="h-3.5 w-3.5 text-muted-foreground mr-1.5" />
-										<p className="text-xs text-muted-foreground">
+										<Award className="h-3 w-3 md:h-3.5 md:w-3.5 text-muted-foreground mr-1 md:mr-1.5" />
+										<p className="text-xs text-muted-foreground line-clamp-1">
 											{member.specialization}
 										</p>
 									</div>
@@ -182,15 +182,15 @@ export const TeamSection = () => {
 
 				{/* View More Button */}
 				{hasMoreMembers && (
-					<div className="text-center mt-12 animate-fade-up">
+					<div className="text-center mt-8 md:mt-12 animate-fade-up">
 						<Button
 							onClick={handleViewMore}
 							variant="outline"
 							size="lg"
-							className="px-8 py-3 text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+							className="px-6 md:px-8 py-2 md:py-3 text-base md:text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
 						>
 							View More Team Members
-							<Users className="ml-2 h-5 w-5" />
+							<Users className="ml-2 h-4 w-4 md:h-5 md:w-5" />
 						</Button>
 					</div>
 				)}
