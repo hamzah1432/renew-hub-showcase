@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: '/app/', // ✅ This ensures assets load from /app/assets/
+  base: '/wp-content/themes/eduma/react-home/', // ✅ This ensures assets load from /app/assets/
   server: {
     host: "::",
     port: 8080,
