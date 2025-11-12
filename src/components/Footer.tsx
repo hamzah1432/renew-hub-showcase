@@ -9,8 +9,18 @@ import {
 
 export const Footer = () => {
   return (
-    <footer className="bg-[#111111] text-white">
-      <div className="container mx-auto px-4 py-12 md:py-16">
+    <>
+      <style>{`
+        footer[class*="bg-[#111111]"]::before,
+        footer[class*="bg-[#111111]"]::after {
+          display: none !important;
+        }
+        footer[class*="bg-[#111111]"] * {
+          background-image: none !important;
+        }
+      `}</style>
+      <footer className="bg-[#111111] text-white relative overflow-hidden">
+        <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
           {/* Logo and Social */}
           <div className="space-y-4 md:space-y-6">
@@ -160,5 +170,6 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
+    </>
   );
 };

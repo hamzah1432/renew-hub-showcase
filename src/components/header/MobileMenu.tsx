@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, ChevronDown } from "lucide-react";
-import { navigation, aboutUsMenuItems, contactInfo } from "../../data/navigationData";
+import { navigation, aboutUsMenuItems } from "../../data/navigationData";
 
 interface MobileMenuProps {
   isMenuOpen: boolean;
@@ -92,7 +92,7 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen, selecte
                         </div>
                       )
                     )}
-                    <button
+                    {/* <button
                       onClick={() => {
                         scrollToSection("#courses");
                         setIsMobileCoursesOpen(false);
@@ -101,7 +101,7 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen, selecte
                       className="w-full mt-3 bg-primary text-white py-2 px-3 rounded text-sm font-medium hover:bg-primary/90 transition-colors"
                     >
                       View All Courses
-                    </button>
+                    </button> */}
                   </div>
                 )}
               </div>
@@ -145,31 +145,17 @@ export const MobileMenu = ({ isMenuOpen, scrollToSection, setIsMenuOpen, selecte
           }
 
           return (
-            <button
+            <a
               key={item.name}
+              href={item.href}
               onClick={() => scrollToSection(item.href)}
               className="block w-full text-left text-foreground hover:text-primary transition-colors font-medium py-2"
             >
               {item.name}
-            </button>
+            </a>
           );
         })}
         
-        <div className="pt-4 border-t">
-          <div className="space-y-2 text-sm text-muted-foreground mb-4">
-            <div className="flex items-center">
-              <Phone className="h-4 w-4 mr-2" />
-              <span>{contactInfo.phone}</span>
-            </div>
-            <div className="flex items-center">
-              <Mail className="h-4 w-4 mr-2" />
-              <span>{contactInfo.email}</span>
-            </div>
-          </div>
-          <Button className="w-full gradient-primary text-white">
-            Enroll Now
-          </Button>
-        </div>
       </nav>
     </div>
   );

@@ -13,7 +13,7 @@ const App = () => {
   return (
     <CourseProvider>
       <div className="min-h-screen">
-        <Header />
+        {/* <Header /> */}
         <main>
           <section id="home">
             <HeroSection />
@@ -40,7 +40,7 @@ const App = () => {
           <FeedbackSection />
         </main>
         
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </CourseProvider>
   );

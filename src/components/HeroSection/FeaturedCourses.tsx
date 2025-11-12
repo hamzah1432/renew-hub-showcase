@@ -261,15 +261,14 @@ export const FeaturedCourses = ({
                 transitionDelay: isActive ? "1000ms" : "0ms",
               }}
             >
+              <a href={`https://professional-institute.com/course-category/discount=${discount}`}>
               <Button
                 className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold"
-                onClick={() => {
-                  window.location.href = `/#courses?discount=${discount}`;
-                }}
               >
                 View All {discount}% Off Courses
                 <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
               </Button>
+              </a>
             </div>
           )}
         </div>

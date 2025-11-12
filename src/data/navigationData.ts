@@ -20,8 +20,6 @@ export const courseCategories: CourseCategories = {
       { name: "Mastering Solar PV Sales & Marketing Course – MSPSM", href: "#course-mspsm" },
       { name: "Certified Solar PV Testing & Commissioning Course – CSPTC", href: "#course-csptc" },
       { name: "Mastering Solar PV System Installation Course – MSPSI", href: "#course-mspsi" },
-      { name: "Mastering SketchUP & PVsyst Solar PV Design Course – MSPVD", href: "#course-mspvd" },
-      { name: "Mastering Solar PV Project Management Course – MSPPM", href: "#course-msppm" },
     ]
   },
   "Electrical Power Courses": {

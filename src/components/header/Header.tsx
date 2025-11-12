@@ -1,13 +1,22 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
 import { MobileMenuButton } from "./MobileMenuButton";
 import { MobileMenu } from "./MobileMenu";
 import { courseCategories } from "@/data/navigationData";
+import { useCourseCategories } from "@/hooks/useCourseCategories";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Get course categories from CourseProvider
+  const {
+    allCourses,
+    renewableEnergyCourses,
+    electricalPowerCourses,
+    loading
+  } = useCourseCategories();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +28,6 @@ export const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const category = "renewable-energy/";
-
-
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -30,17 +36,52 @@ export const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const renewableEnergyCourses = courseCategories["Renewable Energy Courses"];
-  const electricalPowerCourses = courseCategories["Electrical Power Courses"];
-  const webinars = courseCategories["Webinars"];
-  const workshops = courseCategories["workshops"];
-  
-  const selectedCourses = {
-    "Renewable Energy Courses": renewableEnergyCourses,
-    "Electrical Power Courses": electricalPowerCourses,
-    "Webinars": webinars,
-    "Workshops": workshops,
-  };
+  // Create mobile course data same as Navigation component
+  const selectedCourses = React.useMemo(() => {
+    // Static categories (Webinars and Workshops) at the end
+    const staticCategories = {
+      'webinars': courseCategories["Webinars"],
+      'workshops': courseCategories["workshops"]
+    };
+
+    if (loading || allCourses.length === 0) {
+      // If still loading, return dynamic categories first, then static
+      return {
+        'renewable-energy': {
+          name: 'Renewable Energy Courses',
+          courses: courseCategories["Renewable Energy Courses"]?.courses || []
+        },
+        'electrical-power': {
+          name: 'Electrical Power Courses', 
+          courses: courseCategories["Electrical Power Courses"]?.courses || []
+        },
+        ...staticCategories
+      };
+    }
+
+    // Dynamic categories first, then static categories at the end
+    return {
+      'renewable-energy': {
+        name: 'Renewable Energy Courses',
+        courses: renewableEnergyCourses.length > 0 
+          ? renewableEnergyCourses.map(course => ({
+              name: course.name,
+              href: course.link || '#'
+            }))
+          : courseCategories["Renewable Energy Courses"]?.courses || []
+      },
+      'electrical-power': {
+        name: 'Electrical Power Courses',
+        courses: electricalPowerCourses.length > 0
+          ? electricalPowerCourses.map(course => ({
+              name: course.name,
+              href: course.link || '#'
+            }))
+          : courseCategories["Electrical Power Courses"]?.courses || []
+      },
+      ...staticCategories
+    };
+  }, [loading, allCourses, renewableEnergyCourses, electricalPowerCourses]);
 
 
   return (

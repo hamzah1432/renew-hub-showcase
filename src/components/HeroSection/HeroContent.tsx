@@ -54,10 +54,10 @@ export const HeroContent = ({ slide, isActive }: HeroContentProps) => {
           onClick={() => {
             if (slide.discount) {
               // Navigate to courses page with discount filter
-              window.location.href = `/#courses?discount=${slide.discount}`;
+              window.location.href = `https://professional-institute.com/course-category/discount=${slide.discount}`;
             } else {
               // Navigate to all courses
-              window.location.href = '/#courses';
+              window.location.href = 'https://professional-institute.com/courses';
             }
           }}
         >
