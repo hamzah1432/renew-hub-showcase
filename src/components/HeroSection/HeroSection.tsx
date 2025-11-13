@@ -38,7 +38,7 @@ const slides = [
 ];
 
 export const HeroSection = () => {
-  const { getCoursesByDiscount, getCoursesByCategory, loading } = useCourses();
+  const { getCoursesByCategory, loading } = useCourses();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [firstBannerCourses, setFirstBannerCourses] = useState<Course[]>([]);
   const [secondBannerCourses, setSecondBannerCourses] = useState<Course[]>([]);
@@ -58,24 +58,16 @@ export const HeroSection = () => {
   useEffect(() => {
     if (!loading) {
       // Try to get courses with 80% discount, fallback to category
-      let firstBanner = getCoursesByDiscount(80);
-      if (firstBanner.length === 0) {
-        firstBanner = getCoursesByCategory('first-banner');
-      }
-      
+      let firstBanner = getCoursesByCategory('discount80');
       // Try to get courses with 60% discount, fallback to category
-      let secondBanner = getCoursesByDiscount(60);
-      if (secondBanner.length === 0) {
-        secondBanner = getCoursesByCategory('second-banner');
-      }
-      
+      let secondBanner = getCoursesByCategory('discount60');
       setFirstBannerCourses(firstBanner);
       setSecondBannerCourses(secondBanner);
-      
+
       // Delay to show smooth animation
       setTimeout(() => setCoursesLoaded(true), 300);
     }
-  }, [loading, getCoursesByDiscount, getCoursesByCategory]);
+  }, [loading, getCoursesByCategory]);
 
   // Get courses for current slide
   const getCoursesForCurrentSlide = () => {

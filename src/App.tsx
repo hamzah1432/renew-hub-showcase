@@ -1,11 +1,9 @@
-import { Header } from "@/components/header/Header";
 import { CoursesSection } from "@/components/CoursesSection/CoursesSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { TeamSection } from "@/components/TeamSection";
 import { ClientsSection } from "@/components/ClientsSection";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { LastNewsSection } from "@/components/LastNewsSection";
-import { Footer } from "@/components/Footer";
 import { HeroSection } from "./components/HeroSection/HeroSection";
 import { CourseProvider } from "@/contexts/CourseContext";
 

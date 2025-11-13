@@ -8,9 +8,7 @@ import { Course } from '@/types/course';
  * Get all courses from the CourseProvider context
  * Usage: const allCourses = getAllCourses(coursesFromContext);
  */
-export const getAllCourses = (courses: Course[]): Course[] => {
-  return courses || [];
-};
+
 
 /**
  * Filter courses by Renewable Energy category
@@ -160,30 +158,3 @@ export const getCourseStats = (courses: Course[]) => {
     freeCourses: courses.filter(course => course.price === 0).length
   };
 };
-
-/**
- * Example usage with CourseProvider:
- * 
- * import { useCourses } from '@/contexts/CourseContext';
- * import { 
- *   getAllCourses, 
- *   getRenewableEnergyCourses, 
- *   getElectricalPowerCourses 
- * } from '@/utils/courseFilters';
- * 
- * function MyComponent() {
- *   const { allCourses } = useCourses();
- *   
- *   const allCoursesData = getAllCourses(allCourses);
- *   const renewableCourses = getRenewableEnergyCourses(allCourses);
- *   const electricalCourses = getElectricalPowerCourses(allCourses);
- *   
- *   return (
- *     <div>
- *       <h1>Total: {allCoursesData.length}</h1>
- *       <h2>Renewable: {renewableCourses.length}</h2>
- *       <h2>Electrical: {electricalCourses.length}</h2>
- *     </div>
- *   );
- * }
- */

@@ -67,7 +67,7 @@ export const SpecialFeatures = ({ isActive, currentSlide }: SpecialFeaturesProps
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-h-80 md:max-h-96 overflow-hidden pr-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 max-h-80 md:max-h-96 overflow-x-hidden pr-2">
         {specialFeatures.map((feature, featureIndex) => {
           const IconComponent = feature.icon;
           

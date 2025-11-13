@@ -45,15 +45,13 @@ export const FeaturedCourses = ({
 
   return (
     <div
-      className={`transition-all duration-1000 ease-out ${
-        isActive ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-      }`}
-      style={{ transitionDelay: isActive ? "300ms" : "0ms", scrollbarWidth:"none" }}
+      className={`transition-all duration-1000 ease-out ${isActive ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+        }`}
+      style={{ transitionDelay: isActive ? "300ms" : "0ms", scrollbarWidth: "none" }}
     >
       <div
-        className={`mb-4 md:mb-5 lg:mb-6 transition-all duration-1000 ease-out ${
-          isActive ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
-        }`}
+        className={`mb-4 md:mb-5 lg:mb-6 transition-all duration-1000 ease-out ${isActive ? "translate-x-0 opacity-100" : "translate-x-8 opacity-0"
+          }`}
         style={{ transitionDelay: isActive ? "500ms" : "0ms" }}
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
@@ -66,8 +64,8 @@ export const FeaturedCourses = ({
           {slideCategory === "first-banner"
             ? "Master solar energy technology"
             : slideCategory === "second-banner"
-            ? "Advanced wind energy training"
-            : "Most popular renewable energy programs"}
+              ? "Advanced wind energy training"
+              : "Most popular renewable energy programs"}
         </p>
       </div>
 
@@ -87,11 +85,10 @@ export const FeaturedCourses = ({
               className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] group ${
                 // Mobile: hidden, Tablet (768-1023): show only first course, Desktop (1024+): show both courses
                 courseIndex === 0 ? 'md:block hidden' : 'lg:block hidden'
-              } ${
-                coursesLoaded && isActive
+                } ${coursesLoaded && isActive
                   ? "translate-x-0 opacity-100"
                   : "translate-x-8 opacity-0"
-              }`}
+                }`}
               style={{
                 transitionDelay: isActive ? `${700 + courseIndex * 150}ms` : "0ms",
               }}
@@ -118,23 +115,31 @@ export const FeaturedCourses = ({
                       )}
                     </div>
                     <div className="flex flex-wrap gap-1 mb-2">
-                      {course.categories?.slice(0, 2).map((category, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="outline"
-                          className="text-xs px-1 py-0 text-primary border-primary/30 hover:bg-primary/10 hover:scale-105 transition-all duration-200"
-                          style={{ animationDelay: `${idx * 100}ms` }}
-                        >
-                          {category.name}
-                        </Badge>
-                      ))}
+                      {course.categories?.slice(0, 2).map((category, idx) => {
+                        // Check if the category name is the one you want to skip
+                        if (category.name === 'discount=80'||category.name === 'discount=60') {
+                          return null; // Returning null skips rendering this item
+                        }
+
+                        // Otherwise, return the Badge component
+                        return (
+                          <Badge
+                            key={idx}
+                            variant="outline"
+                            className="text-xs px-1 py-0 text-primary border-primary/30 hover:bg-primary/10 hover:scale-105 transition-all duration-200"
+                            style={{ animationDelay: `${idx * 100}ms` }}
+                          >
+                            {category.name}
+                          </Badge>
+                        );
+                      })}
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 md:gap-3 text-xs text-muted-foreground">
-                        <div className="flex items-center">
+                        {/* <div className="flex items-center">
                           <Clock className="h-3 w-3 mr-1" />
                           {course.duration || "Flexible"}
-                        </div>
+                        </div> */}
                         <div className="hidden lg:flex items-center">
                           <Users className="h-3 w-3 mr-1" />
                           Online
@@ -177,11 +182,10 @@ export const FeaturedCourses = ({
             {getCoursesForSlide(1).map((course, courseIndex) => (
               <Card
                 key={`mobile-${course.id}-${currentSlide}`}
-                className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group ${
-                  coursesLoaded && isActive
+                className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group ${coursesLoaded && isActive
                     ? "translate-y-0 opacity-100"
                     : "translate-y-4 opacity-0"
-                }`}
+                  }`}
                 style={{
                   transitionDelay: isActive ? "700ms" : "0ms",
                 }}
@@ -252,22 +256,21 @@ export const FeaturedCourses = ({
           {/* View All Call-to-Action Button */}
           {discount && courses.length > 0 && (
             <div
-              className={`mt-4 transition-all duration-1000 ease-out ${
-                coursesLoaded && isActive
+              className={`mt-4 transition-all duration-1000 ease-out ${coursesLoaded && isActive
                   ? "translate-y-0 opacity-100"
                   : "translate-y-4 opacity-0"
-              }`}
+                }`}
               style={{
                 transitionDelay: isActive ? "1000ms" : "0ms",
               }}
             >
               <a href={`https://professional-institute.com/course-category/discount=${discount}`}>
-              <Button
-                className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold"
-              >
-                View All {discount}% Off Courses
-                <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
-              </Button>
+                <Button
+                  className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold"
+                >
+                  View All {discount}% Off Courses
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
+                </Button>
               </a>
             </div>
           )}

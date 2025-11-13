@@ -23,7 +23,7 @@ export const HeroSlide = ({ slide, isActive, index, currentSlide, children }: He
       }`}
     >
       <div
-        className={`w-full h-full bg-cover bg-center relative transition-transform duration-[1500ms] ease-out ${
+        className={`w-full h-full bg-cover bg-center relative transition-transform duration-&lsqb;15000ms&rsqb; ease-out ${
           isActive ? "scale-100" : "scale-110"
         }`}
         style={{

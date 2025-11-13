@@ -106,7 +106,13 @@ export const CoursesSection = () => {
 
   const filteredCourses = courses.filter((course) => {
     const languageMatch = languageFilter === "All" || course.language === languageFilter;
-    const packageMatch = packageFilter === "All" || course.package === packageFilter;
+    
+    // When packageFilter is "All", exclude courses with package types (Silver, Bronze, Gold)
+    // Otherwise, match the specific package
+    const packageMatch = packageFilter === "All" 
+      ? course.package === "Standard" 
+      : course.package === packageFilter;
+    
     const categoryMatch = getCategoryMatch(course.categories, categoryFilter);
 
     return languageMatch && packageMatch && categoryMatch;

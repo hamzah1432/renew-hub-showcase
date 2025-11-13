@@ -95,7 +95,7 @@ export const CourseCard = ({ course, index = 0 }: CourseCardProps) => {
           </div>
 
           {/* Course Stats */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-3.5 md:mb-4">
+          {/* <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-3.5 md:mb-4">
             <div className="flex items-center">
               <Clock className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
               <span className="truncate">{course.duration}</span>
@@ -108,7 +108,7 @@ export const CourseCard = ({ course, index = 0 }: CourseCardProps) => {
               <UserCheck className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
               <span className="truncate">{course.currentStudents}/{course.capacity}</span>
             </div>
-          </div>
+          </div> */}
 
           {/* Instructor */}
           <div className="flex items-center gap-2 mb-3 sm:mb-3.5 md:mb-4 p-1.5 sm:p-2 bg-muted/50 rounded-lg">

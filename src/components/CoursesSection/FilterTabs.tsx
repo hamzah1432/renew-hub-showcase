@@ -68,7 +68,7 @@ export const FilterTabs = ({
             {/* Package Filter */}
             <div className="flex items-center justify-evenly bg-card rounded-lg lg:rounded-xl p-1 shadow-card w-full lg:w-auto overflow-x-auto">
                 <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
-                    Package:
+                   Special Packaging:
                 </span>
                 {["All", "Silver", "Bronze", "Gold"].map((pkg) => (
                     <Button
