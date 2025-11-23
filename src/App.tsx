@@ -6,12 +6,14 @@ import { FeedbackSection } from "@/components/FeedbackSection";
 import { LastNewsSection } from "@/components/LastNewsSection";
 import { HeroSection } from "./components/HeroSection/HeroSection";
 import { CourseProvider } from "@/contexts/CourseContext";
+import { Header } from "./components/header/Header";
+import { Footer } from "./components/Footer";
 
 const App = () => {
   return (
     <CourseProvider>
       <div className="min-h-screen">
-        {/* <Header /> */}
+        <Header />
         <main>
           <section id="home">
             <HeroSection />
@@ -38,7 +40,7 @@ const App = () => {
           <FeedbackSection />
         </main>
         
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </CourseProvider>
   );
