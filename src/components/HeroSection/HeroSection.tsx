@@ -15,18 +15,21 @@ const slides = [
     id: 1,
     image: heroWind,
     title: "Discount Courses",
-    subtitle: "Explore top courses currently available at 80% discount",
+    subtitle: "Explore top courses currently available at 75% discount",
     categorySlug: "first-banner",
-    discount: 80,
+    discount: 75,
+    herf: "https://professional-institute.com/course-category/discount=80",
   },
   {
     id: 2,
     image: heroSolar,
     title: "Master Solar Energy Engineering",
     subtitle:
-      "Comprehensive courses in photovoltaic systems at 60% discount",
+      "Comprehensive courses in photovoltaic systems at 55% discount",
     categorySlug: "second-banner",
-    discount: 60,
+    discount: 55,
+    herf: "https://professional-institute.com/course-category/discount=60",
+
   },
   {
     id: 3,
@@ -124,6 +127,7 @@ export const HeroSection = () => {
                   coursesLoaded={coursesLoaded}
                   slideCategory={slide.categorySlug}
                   discount={slide.discount}
+                  herf={slide.herf}
                 />
               )}
             </div>

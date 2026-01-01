@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 interface HeroContentProps {
   slide: {
     subtitle: string;
     discount?: number;
     categorySlug?: string;
+    herf?: string;
   };
   isActive: boolean;
 }
@@ -54,7 +54,8 @@ export const HeroContent = ({ slide, isActive }: HeroContentProps) => {
           onClick={() => {
             if (slide.discount) {
               // Navigate to courses page with discount filter
-              window.location.href = `https://professional-institute.com/course-category/discount=${slide.discount}`;
+              console.log(slide.herf);``
+              window.location.href = slide.herf;
             } else {
               // Navigate to all courses
               window.location.href = 'https://professional-institute.com/courses';

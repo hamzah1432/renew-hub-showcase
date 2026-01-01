@@ -12,6 +12,7 @@ interface FeaturedCoursesProps {
   coursesLoaded: boolean;
   slideCategory?: string;
   discount?: number;
+  herf?: string;
 }
 
 export const FeaturedCourses = ({
@@ -22,6 +23,7 @@ export const FeaturedCourses = ({
   coursesLoaded,
   slideCategory,
   discount,
+  herf,
 }: FeaturedCoursesProps) => {
   // Helper function to get courses for current slide
   const getCoursesForSlide = (count: number = 2) => {
@@ -264,7 +266,7 @@ export const FeaturedCourses = ({
                 transitionDelay: isActive ? "1000ms" : "0ms",
               }}
             >
-              <a href={`https://professional-institute.com/course-category/discount=${discount}`}>
+              <a href={herf}>
                 <Button
                   className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold  text-[#7da951]"
                 >
