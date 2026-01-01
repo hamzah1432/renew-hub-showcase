@@ -30,7 +30,7 @@ export const HeroContent = ({ slide, isActive }: HeroContentProps) => {
         className={`text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 md:mb-5 lg:mb-6 leading-tight transition-all duration-1000 ease-out ${
           isActive ? "translate-x-0 opacity-100" : "-translate-x-12 opacity-0"
         }`}
-        style={{ transitionDelay: isActive ? "400ms" : "0ms" }}
+        style={{ color:"white", transitionDelay: isActive ? "400ms" : "0ms" }}
       >
         Professional Institute
       </h1>

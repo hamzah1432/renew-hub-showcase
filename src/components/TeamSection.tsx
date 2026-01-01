@@ -9,7 +9,7 @@ const teamMembers = [
 		name: "Abdulrahman Smadi",
 		role: "Instructor",
 		specialization: "Solar Energy Systems",
-		image: "Abdulrahman_Smadi.jpeg",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Abdulrahman_Smadi.jpeg",
 		linkedin: "https://www.linkedin.com/in/a-smadi/",
 	},
 	{
@@ -17,7 +17,7 @@ const teamMembers = [
 		name: "Abdulrahman Al-Mashti",
 		role: "Instructor",
 		specialization: "Solar Systems Modelling Expert",
-		image: "Abdulrahman_Almashti.png",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Abdulrahman_Almashti.png",
 		linkedin: "",
 	},
 	{
@@ -25,7 +25,7 @@ const teamMembers = [
 		name: "Amaal Al-Khatatbeh",
 		role: "Instructor",
 		specialization: "Green Energy Solutions Specialist",
-		image: "Amaal_Al-Khatatbeh.png",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Amaal_Al-Khatatbeh.png",
 		linkedin: "https://www.linkedin.com/in/amaal-al-khatatbeh/",
 	},
 	{
@@ -33,7 +33,7 @@ const teamMembers = [
 		name: "Anan Omar",
 		role: "Instructor",
 		specialization: "Solar PV Sales & Design Expert",
-		image: "Anan_Omar.jpeg",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Anan_Omar.jpeg",
 		linkedin: "https://www.linkedin.com/in/anan-omar/",
 	},
 	{
@@ -41,7 +41,7 @@ const teamMembers = [
 		name: "Awangum",
 		role: "Instructor",
 		specialization: "Solar Water Pumping Systems Specialist",
-		image: "Awangum.png",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Awangum.png",
 		linkedin: "",
 	},
 	{
@@ -49,7 +49,7 @@ const teamMembers = [
 		name: "Ayman Mousa",
 		role: "Instructor",
 		specialization: "Solar PV Systems Expert",
-		image: "Ayman_Mousa.jpeg",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Ayman_Mousa.jpeg",
 		linkedin: "",
 	},
 	{
@@ -57,7 +57,7 @@ const teamMembers = [
 		name: "Charles Ekpima",
 		role: "Instructor",
 		specialization: "Solar Energy Repairs Trainer",
-		image: "Charles_Ekpima.png",
+		image: "https://professional-institute.com/wp-content/themes/eduma/react-home/Charles_Ekpima.png",
 		linkedin: "https://www.linkedin.com/in/charles-ekpima/",
 	},
 	{

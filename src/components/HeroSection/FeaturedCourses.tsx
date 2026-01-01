@@ -266,7 +266,7 @@ export const FeaturedCourses = ({
             >
               <a href={`https://professional-institute.com/course-category/discount=${discount}`}>
                 <Button
-                  className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold"
+                  className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold  text-[#7da951]"
                 >
                   View All {discount}% Off Courses
                   <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />

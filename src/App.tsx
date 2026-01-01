@@ -11,38 +11,42 @@ import { Footer } from "./components/Footer";
 
 const App = () => {
   return (
-    <CourseProvider>
-      <div className="min-h-screen">
-        <Header />
-        <main>
-          <section id="home">
-            <HeroSection />
-          </section>
-          
-          <section id="courses">
-            <CoursesSection />
-          </section>
-          
-          <section id="about">
-            <FeaturesSection />
-          </section>
-          
-          <section id="team">
-            <TeamSection />
-          </section>
-          
-          <ClientsSection />
-          
-          <section id="news">
-            <LastNewsSection />
-          </section>
-          
-          <FeedbackSection />
-        </main>
-        
-        <Footer />
-      </div>
-    </CourseProvider>
+    <div className="react-home-page">
+
+      <CourseProvider>
+        <div className="min-h-screen">
+          {/* <Header /> */}
+          <main>
+            <section id="home">
+              <HeroSection />
+            </section>
+
+            <section id="courses">
+              <CoursesSection />
+            </section>
+
+            <section id="about">
+              <FeaturesSection />
+            </section>
+
+            <section id="team">
+              <TeamSection />
+            </section>
+
+            <ClientsSection />
+
+            <section id="news">
+              <LastNewsSection />
+            </section>
+
+            <FeedbackSection />
+          </main>
+
+          {/* <Footer /> */}
+        </div>
+      </CourseProvider>
+    </div>
+
   );
 };
 
