@@ -53,7 +53,7 @@ export const HeroSection = () => {
       if (!isAnimating) {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
       }
-    }, 80000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [isAnimating]);
 

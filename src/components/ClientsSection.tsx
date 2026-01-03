@@ -114,8 +114,8 @@ export const ClientsSection = () => {
 				{/* Slider Container */}
 				<div className="relative max-w-4xl mx-auto">
 					{/* Navigation Controls */}
-					<div className="flex items-center justify-between mb-6 md:mb-8">
-						<div className="flex items-center gap-2 md:gap-4">
+					<div style={{justifyContent:"space-around"}} className="flex items-center justify-between mb-6 md:mb-8">
+						<div  className="flex items-center gap-2 justify-between md:gap-4">
 							<Button
 								variant="outline"
 								size="icon"
