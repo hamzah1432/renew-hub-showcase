@@ -4,6 +4,7 @@ import { TeamSection } from "@/components/TeamSection";
 import { ClientsSection } from "@/components/ClientsSection";
 import { FeedbackSection } from "@/components/FeedbackSection";
 import { LastNewsSection } from "@/components/LastNewsSection";
+import { ExcelMaterialsSection } from "@/components/ExcelMaterialsSection";
 import { HeroSection } from "./components/HeroSection/HeroSection";
 import { CourseProvider } from "@/contexts/CourseContext";
 import { Header } from "./components/header/Header";
@@ -25,6 +26,10 @@ const App = () => {
               <CoursesSection />
             </section>
 
+            <section id="excel-materials">
+              <ExcelMaterialsSection />
+            </section>
+
             <section id="about">
               <FeaturesSection />
             </section>
@@ -38,6 +43,8 @@ const App = () => {
             <section id="news">
               <LastNewsSection />
             </section>
+
+
 
             <FeedbackSection />
           </main>

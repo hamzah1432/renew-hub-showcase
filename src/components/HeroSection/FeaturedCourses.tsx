@@ -220,7 +220,6 @@ export const FeaturedCourses = ({
                             variant="outline"
                             className="text-xs px-1 py-0 text-primary border-primary/30 hover:bg-primary/10 transition-all duration-200"
                           >
-                            {category.name}
                           </Badge>
                         ))}
                       </div>
