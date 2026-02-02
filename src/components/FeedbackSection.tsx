@@ -13,15 +13,6 @@ const testimonials = [
 			"“I am genuinely impressed by Professional Renewable Energy Institute, where the commitment to exceptional teaching goes hand in hand with a human touch. The courses, both engaging and enlightening, have gone above and beyond, providing a truly enriching learning experience that extends far beyond what I anticipated.”",
 	},
 	{
-		id: 2,
-		name: "Ghofrane Rezgui",
-		role: "Project Engineer at ILF Consulting Engineering ",
-		image: "https://professional-institute.com/wp-content/uploads/2023/12/avatar-woman.png",
-		rating: 5,
-		feedback:
-			"“I highly recommend the Certified Solar PV System Course (Design, Management & Execution) I completed on this platform, particularly for fellow engineers seeking comprehensive preparation for the job market. I found the learning experience to be exceptionally beneficial, and I believe it plays a pivotal role in shaping capable and job-ready engineers.”",
-	},
-	{
 		id: 3,
 		name: "Abdullah Baradei",
 		role: "Sales Manager at Alternative Energy",

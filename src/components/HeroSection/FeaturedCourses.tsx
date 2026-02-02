@@ -66,7 +66,7 @@ export const FeaturedCourses = ({
           {slideCategory === "first-banner"
             ? "Master solar energy technology"
             : slideCategory === "second-banner"
-              ? "Advanced wind energy training"
+              ? "Advanced Solar and BESS Technologies"
               : "Most popular renewable energy programs"}
         </p>
       </div>

@@ -33,7 +33,8 @@ export const CoursesGrid = ({
             onClick={onViewMore}
             variant="outline"
             size="lg"
-            className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 text-base sm:text-lg font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
+            style={{backgroundColor:""}}
+            className="px-6 sm:px-7 md:px-8 py-2 sm:py-2.5 md:py-3 text-base sm:text-lg font-semibold border-2 !border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105"
           >
             View More Courses
             <BookOpen className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />

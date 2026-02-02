@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const MaterialCard = ({ material }: any) => {
     const price = (material.on_sale ? material.sale_price : material.price).toFixed(2);
-    const description = material.description || 'Professional Excel template for renewable energy projects.';
+    const description = material.description || 'Professional Excel Tool for renewable energy projects.';
     //   const description = material.instructor.description || 'Professional Excel template for renewable energy projects.';
 
 
@@ -66,10 +66,10 @@ export const ExcelMaterialsSection = () => {
             <div className="container mx-auto px-4">
                 <div className="text-center mb-10 md:mb-12 lg:mb-16 animate-fade-up">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-secondary mb-3 md:mb-4 lg:mb-6">
-                        Premium Excel Materials & Templates
+                        Premium Excel Sizing Tool
                     </h2>
                     <p className="text-sm md:text-base lg:text-lg xl:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-                        Professional-grade Excel templates designed for renewable energy projects, calculations, and management.
+                        Professional-grade Excel Tool designed for renewable energy projects, calculations, and management.
                     </p>
                 </div>
 
