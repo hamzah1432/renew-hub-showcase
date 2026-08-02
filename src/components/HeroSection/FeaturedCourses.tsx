@@ -32,12 +32,10 @@ export const FeaturedCourses = ({
   };
 
   const getHeaderText = () => {
-    if (discount) {
-      return `${discount}% Off Courses`;
-    }
+
     switch (slideCategory) {
       case "first-banner":
-        return "Courses on Discount";
+        return "Live Courses";
       case "second-banner":
         return "Featured Solar Courses";
       default:
@@ -58,13 +56,11 @@ export const FeaturedCourses = ({
       >
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-2">
           {getHeaderText()}
-          <span className="text-xs md:text-sm lg:text-base font-normal text-white/70 ml-2">
-            ({currentSlide + 1}/3)
-          </span>
+
         </h2>
         <p className="text-sm md:text-sm lg:text-base text-white/80">
           {slideCategory === "first-banner"
-            ? "Master solar energy technology"
+            ? "Join Our Next Live Session"
             : slideCategory === "second-banner"
               ? "Advanced Solar and BESS Technologies"
               : "Most popular renewable energy programs"}
@@ -119,7 +115,7 @@ export const FeaturedCourses = ({
                     <div className="flex flex-wrap gap-1 mb-2">
                       {course.categories?.slice(0, 2).map((category, idx) => {
                         // Check if the category name is the one you want to skip
-                        if (category.name === 'discount=80'||category.name === 'discount=60') {
+                        if (category.name === 'discount=80' || category.name === 'discount=60') {
                           return null; // Returning null skips rendering this item
                         }
 
@@ -138,10 +134,7 @@ export const FeaturedCourses = ({
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 md:gap-3 text-xs text-muted-foreground">
-                        {/* <div className="flex items-center">
-                          <Clock className="h-3 w-3 mr-1" />
-                          {course.duration || "Flexible"}
-                        </div> */}
+
                         <div className="hidden lg:flex items-center">
                           <Users className="h-3 w-3 mr-1" />
                           Online
@@ -185,8 +178,8 @@ export const FeaturedCourses = ({
               <Card
                 key={`mobile-${course.id}-${currentSlide}`}
                 className={`overflow-x-hidden bg-white/95 backdrop-blur-sm border-0 shadow-hero hover:shadow-xl transition-all duration-500 hover:scale-[1.02] group ${coursesLoaded && isActive
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-4 opacity-0"
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-4 opacity-0"
                   }`}
                 style={{
                   transitionDelay: isActive ? "700ms" : "0ms",
@@ -255,11 +248,35 @@ export const FeaturedCourses = ({
           </div>
 
           {/* View All Call-to-Action Button */}
-          {discount && courses.length > 0 && (
+
+          {slideCategory === "first-banner" ?
+
+
             <div
               className={`mt-4 transition-all duration-1000 ease-out ${coursesLoaded && isActive
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-4 opacity-0"
+                ? "translate-y-0 opacity-100"
+                : "translate-y-4 opacity-0"
+                }`}
+              style={{
+                transitionDelay: isActive ? "1000ms" : "0ms",
+              }}
+            >
+              <a href={herf}>
+                <Button
+                  className="w-full bg-white text-primary hover:bg-white/90 hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-xl group/cta font-semibold  text-[#7da951]"
+                >
+                  View All Live Courses
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
+                </Button>
+              </a>
+            </div> :
+
+
+
+            <div
+              className={`mt-4 transition-all duration-1000 ease-out ${coursesLoaded && isActive
+                ? "translate-y-0 opacity-100"
+                : "translate-y-4 opacity-0"
                 }`}
               style={{
                 transitionDelay: isActive ? "1000ms" : "0ms",
@@ -273,8 +290,9 @@ export const FeaturedCourses = ({
                   <ArrowRight className="ml-2 h-4 w-4 group-hover/cta:translate-x-1 transition-transform duration-300" />
                 </Button>
               </a>
-            </div>
-          )}
+            </div> 
+
+          }
         </div>
       )}
     </div>

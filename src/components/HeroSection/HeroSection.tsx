@@ -15,10 +15,10 @@ const slides = [
     id: 1,
     image: heroWind,
     title: "Discount Courses",
-    subtitle: "Explore top courses currently available at 75% discount",
+    subtitle: "Explore top Live courses currently available",
     categorySlug: "first-banner",
-    discount: 75,
-    herf: "https://professional-institute.com/course-category/discount=80",
+
+    herf: "https://professional-institute.com/course-category/live-courses",
   },
   {
     id: 2,
@@ -53,7 +53,7 @@ export const HeroSection = () => {
       if (!isAnimating) {
         setCurrentSlide((prev) => (prev + 1) % slides.length);
       }
-    }, 5000);
+    }, 100000);
     return () => clearInterval(timer);
   }, [isAnimating]);
 
@@ -61,7 +61,7 @@ export const HeroSection = () => {
   useEffect(() => {
     if (!loading) {
       // Try to get courses with 80% discount, fallback to category
-      let firstBanner = getCoursesByCategory('discount80');
+      let firstBanner = getCoursesByCategory('live-courses');
       // Try to get courses with 60% discount, fallback to category
       let secondBanner = getCoursesByCategory('discount60');
       setFirstBannerCourses(firstBanner);

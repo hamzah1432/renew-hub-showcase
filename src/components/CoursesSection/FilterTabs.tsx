@@ -70,7 +70,7 @@ export const FilterTabs = ({
                 <span className="text-xs lg:text-sm font-medium text-muted-foreground px-2 lg:px-3 py-1 lg:py-2 whitespace-nowrap">
                    Special Packaging:
                 </span>
-                {["All", "Silver", "Bronze", "Gold"].map((pkg) => (
+                {["All", "Live", "pre recorded"].map((pkg) => (
                     <Button
                         key={pkg}
                         variant={packageFilter === pkg ? "default" : "ghost"}

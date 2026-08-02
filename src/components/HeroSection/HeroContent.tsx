@@ -63,7 +63,7 @@ export const HeroContent = ({ slide, isActive }: HeroContentProps) => {
           }}
         >
           <ArrowRight className="mr-2 h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform duration-300" />
-          {slide.discount ? `View ${slide.discount}% Off Courses` : 'Explore All Courses'}
+          {slide.categorySlug === "first-banner" ? 'View Live Courses' : slide.categorySlug === "second-banner" ? 'View 55% Discounted Courses' : 'View All Courses'}
         </Button>
       </div>
     </div>

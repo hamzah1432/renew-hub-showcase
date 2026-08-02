@@ -77,14 +77,6 @@ const teamMembers = [
 		linkedin: "https://www.linkedin.com/in/ramahijazi/#",
 	},
 	{
-		id: 10,
-		name: "Reem Jawarneh",
-		role: "Instructor",
-		specialization: "Green Technology Specialist",
-		image: "https://professional-institute.com/wp-content/uploads/learn-press-profile/14/51bcfaaea632d008fb6f910a68afb8f5.jpeg",
-		linkedin: "https://www.linkedin.com/in/reem-jawarneh-653ba51b2/",
-	},
-	{
 		id: 11,
 		name: "Salem Al Khawaja",
 		role: "Instructor",
