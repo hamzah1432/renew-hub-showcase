@@ -39,6 +39,54 @@ const testimonials = [
 		feedback:
 			"“I highly commend Professional Renewable Energy Institute for its exceptional teaching standards. Engaging and insightful, the courses offered have proven to be immensely beneficial, providing a valuable learning experience that goes beyond expectations, and will significantly equip engineers and enhance their skills, making them more prepared and confident to meet the demands of the job market.”",
 	},
+	{
+		id: 6,
+		name: "Kaleem Ansari",
+		role: "Solar Engineer and Safety",
+		image: "https://ui-avatars.com/api/?name=Kaleem+Ansari&background=random&color=fff",
+		rating: 5,
+		feedback: "“I’m pleased to share that I have successfully completed the Mastering Energy Storage Systems Course (MESS), conducted by the Professional Renewable Energy Institute (PRE-Institute). This course provided valuable insights into modern battery technologies, BMS architecture, grid integration, and hybrid renewable systems, equipping me with deeper knowledge in the fast-evolving field of Energy Storage Solutions — an essential pillar for achieving 24/7 clean energy and grid stability. A big thank you to Mark Klein (CEO, PRE-Institute) and Tarek Merhki (Instructor) for their guidance and support.”"
+	},
+	{
+		id: 7,
+		name: "Samuel Maged Moreed",
+		role: "Renewable Energy Engineer",
+		image: "https://ui-avatars.com/api/?name=Samuel+Maged+Moreed&background=random&color=fff",
+		rating: 5,
+		feedback: "“New Step in Renewable Energy Field ⚡ I would like to share with you that I finished “ Mastering Solar PV System Installation Course “ ( MSPSI ) 💖 ⚡ Special thanks to Professional Renewable Energy Institute - PRE Institute”"
+	},
+	{
+		id: 8,
+		name: "Dinusha Lakshan",
+		role: "Project Engineer | Project Development | Solar PV",
+		image: "https://ui-avatars.com/api/?name=Dinusha+Lakshan&background=random&color=fff",
+		rating: 5,
+		feedback: "“I'm happy to share that I've obtained a new certification: Mastering SketchUP & PVsyst Solar PV Design Course – MSPVD from Professional Renewable Energy Institute - PRE Institute!This course has equipped me with essential skills for designing and optimizing grid-connected solar PV systems, using industry-leading tools like SketchUp for 3D modeling and PVsyst for detailed simulation and performance analysis. 📚 Skills Gained: ✔ 3D Solar PV Design using SketchUp ✔ PVsyst Simulation & Energy Production Optimization ✔ Shading Analysis & System Performance ✔ Financial Modeling & ROI Analysis This training enhances my ability to contribute to innovative solar energy solutions, ensuring both high performance and cost-effectiveness in every project.”"
+	},
+	{
+		id: 9,
+		name: "Dinusha Lakshan",
+		role: "Project Engineer | Project Development | Solar PV Design",
+		image: "https://ui-avatars.com/api/?name=Dinusha+Lakshan&background=random&color=fff",
+		rating: 5,
+		feedback: "“I’m happy to share that I’ve earned a new certification: Certified Solar PV Testing & Commissioning (CSPTC) from the Professional Renewable Energy Institute - PRE Institute This course has strengthened my expertise in the practical aspects of solar PV systems—covering pre-commissioning checks, performance verification, and compliance with safety and quality standards. A big thank you to Abdalrahman Smadi for the valuable insights and guidance throughout the training. Looking forward to applying these skills to ensure the successful deployment of high-performance solar energy systems!”"
+	},
+	{
+		id: 10,
+		name: "Aseel Radwan",
+		role: "Powered by the sun ☀️",
+		image: "https://ui-avatars.com/api/?name=Aseel+Radwan&background=random&color=fff",
+		rating: 5,
+		feedback: "“Excited to share that I have successfully completed the Solar PV Electrical Drawing Design course at the Professional Renewable Energy Institute - PRE Institute , passing the required exam. This training provided indepth knowledge on designing electrical drawings for solar photovoltaic systems an essential component in delivering safe, efficient, and compliant solar systems projects. Looking forward to putting this knowledge into practice on real-world projects!”"
+	},
+	{
+		id: 11,
+		name: "Abedalaziz Derbas",
+		role: "Solar Energy Design | Mechanical Design Engineer",
+		image: "https://ui-avatars.com/api/?name=Abedalaziz+Derbas&background=random&color=fff",
+		rating: 5,
+		feedback: "“I'm happy to share that I've obtained a new certification: Mastering Solar PV Structure Design Course from Professional Renewable Energy Institute - PRE Institute!”"
+	}
 ];
 
 export const FeedbackSection = () => {
@@ -85,7 +133,7 @@ export const FeedbackSection = () => {
 	const currentTestimonial = testimonials[currentIndex];
 
 	return (
-		<section 
+		<section
 			className="py-12 md:py-16 lg:py-20 bg-white"
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
@@ -103,9 +151,8 @@ export const FeedbackSection = () => {
 					{testimonials.map((testimonial, index) => (
 						<div
 							key={testimonial.id}
-							className={`cursor-pointer transition-all duration-300 transform hover:scale-110 flex-shrink-0 ${
-								index === currentIndex ? "opacity-100 scale-110" : "opacity-50 hover:opacity-75"
-							}`}
+							className={`cursor-pointer transition-all duration-300 transform hover:scale-110 flex-shrink-0 ${index === currentIndex ? "opacity-100 scale-110" : "opacity-50 hover:opacity-75"
+								}`}
 							onClick={() => {
 								setCurrentIndex(index);
 								setIsPaused(true); // Pause auto-scroll when user clicks
@@ -171,9 +218,8 @@ export const FeedbackSection = () => {
 									setIsPaused(true); // Pause auto-scroll when user clicks
 									setTimeout(() => setIsPaused(false), 5000); // Resume auto-scroll after 5 seconds
 								}}
-								className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${
-									currentIndex === index ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
-								}`}
+								className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all duration-300 ${currentIndex === index ? "bg-gray-800 scale-125" : "bg-gray-300 hover:bg-gray-400"
+									}`}
 							/>
 						))}
 					</div>
